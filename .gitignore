@@ -1,0 +1,12 @@
+target/
+.mooncakes/
+.DS_Store
+.vscode
+build
+lib
+
+a.exe
+
+temp.sh
+
+.cache
