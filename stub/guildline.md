@@ -1,0 +1,1 @@
+Never use `auto` in toplevel function.

@@ -13,24 +13,14 @@ using namespace moonbit::types;
 
 // illusory0x0_
 
-template <typename T> void finalize(void *obj) {
-  auto self = (T *)obj;
-  self->~T();
-}
-
-template <typename T> T *make_external_object() {
-  return (T *)moonbit_make_external_object(finalize<T>, sizeof(T));
-}
-
-using PaintHandler = Closure<Unit, Ref<QPainter>>;
+using PaintHandler = Closure<Unit, Extern<QPainter>>;
 
 struct Window : QWidget {
   PaintHandler paint;
   Window(PaintHandler p) : QWidget(), paint(p) {}
   virtual void paintEvent(QPaintEvent *event) noexcept override {
-    let painter = Ref<QPainter>::from_cxx_ref(this);
-    this->paint(painter);
-    painter.decrement_strong_count();
+    let painter = QPainter{this};
+    this->paint(Extern<QPainter>::from(&painter));
   }
   ~Window() = default;
 };
@@ -39,6 +29,7 @@ using Bytes = FixedArray<Byte>;
 
 // use force template instantiation
 // https://github.com/llvm/llvm-project/issues/137282#issue-3018926539
+// This actually only need in MSVC, clang has false positive diagnostics
 static void force_template_instantiation() {
   { Ref<QApplication> _; }
   { Ref<Window> _; }
@@ -52,6 +43,10 @@ static void force_template_instantiation() {
   { FixedArray<Bytes> _; }
   { FixedArray<Ref<QString>> _; }
   { FixedArray<Ref<QRectF>> _; }
+  { FixedArray<Ref<QBrush>> _; }
+  { FixedArray<Ref<QPen>> _; }
+  { FixedArray<Ref<QSizeF>> _; }
+  { FixedArray<Ref<QPointF>> _; }
 }
 
 extern "C" {
@@ -80,13 +75,11 @@ Ref<QString> illusory0x0_QString_new(String str) {
                                     str.length().repr);
 }
 
-QBrush *illusory0x0_QBrush_new(Ref<QColor> color) {
-  auto self = make_external_object<QBrush>();
-  return new (self) QBrush(*color);
+Ref<QBrush> illusory0x0_QBrush_new(Ref<QColor> color) {
+  return Ref<QBrush>::from_cxx_ref(*color.repr);
 }
-QPen *illusory0x0_QPen_new(QBrush *brush, double width) {
-  auto self = make_external_object<QPen>();
-  return new (self) QPen(*brush, width);
+Ref<QPen> illusory0x0_QPen_new(Ref<QBrush> brush, Double width) {
+  return Ref<QPen>::from_cxx_ref(*brush.repr, width.repr);
 }
 Ref<QFontMetricsF> illusory0x0_QFontMetricsF_new(Ref<QFont> font) {
   return Ref<QFontMetricsF>::from_cxx_ref(*font.repr);
@@ -111,13 +104,12 @@ Ref<QFont> illusory0x0_QFont_new(Ref<QStringList> families, Int size,
 Ref<QRectF> illusory0x0_QRectF_new(Double x, Double y, Double w, Double h) {
   return Ref<QRectF>::from(x, y, w, h);
 }
-QSizeF *illusory0x0_QSizeF_new(double w, double h) {
-  auto self = make_external_object<QSizeF>();
-  return new (self) QSizeF(w, h);
+Ref<QSizeF> illusory0x0_QSizeF_new(Double w, Double h) {
+  return Ref<QSizeF>::from(w, h);
+  // return Ref
 }
-QPointF *illusory0x0_QPointF_new(double x, double y) {
-  auto self = make_external_object<QPointF>();
-  return new (self) QPointF(x, y);
+Ref<QPointF> illusory0x0_QPointF_new(Double x, Double y) {
+  return Ref<QPointF>::from(x, y);
 }
 // conversion
 moonbit_string_t illusory0x0_QString_to_moonbit_string(Ref<QString> self) {
@@ -129,11 +121,11 @@ moonbit_string_t illusory0x0_QString_to_moonbit_string(Ref<QString> self) {
 }
 
 // methods
-void illusory0x0_QPainter_setBrush(Ref<QPainter> self, QBrush *brush) {
+void illusory0x0_QPainter_setBrush(Ref<QPainter> self, Ref<QBrush> brush) {
   self->setBrush(*brush);
 }
 
-void illusory0x0_QPainter_setPen(Ref<QPainter> self, QPen *pen) {
+void illusory0x0_QPainter_setPen(Ref<QPainter> self, Ref<QPen> pen) {
   self->setPen(*pen);
 }
 
@@ -189,11 +181,11 @@ double illusory0x0_QRectF_right(Ref<QRectF> self) { return self->right(); }
 double illusory0x0_QRectF_top(Ref<QRectF> self) { return self->top(); }
 double illusory0x0_QRectF_bottom(Ref<QRectF> self) { return self->bottom(); }
 
-double illusory0x0_QSizeF_width(QSizeF *self) { return self->width(); }
-double illusory0x0_QSizeF_height(QSizeF *self) { return self->height(); }
+double illusory0x0_QSizeF_width(Ref<QSizeF> self) { return self->width(); }
+double illusory0x0_QSizeF_height(Ref<QSizeF> self) { return self->height(); }
 
-double illusory0x0_QPointF_x(QPointF *self) { return self->x(); }
-double illusory0x0_QPointF_y(QPointF *self) { return self->y(); }
+double illusory0x0_QPointF_x(Ref<QPointF> self) { return self->x(); }
+double illusory0x0_QPointF_y(Ref<QPointF> self) { return self->y(); }
 double illusory0x0_Window_devicePixelRatioF(Ref<Window> self) {
   return self->devicePixelRatioF();
 }

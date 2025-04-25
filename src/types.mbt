@@ -8,7 +8,7 @@ type QApplication
 ///|
 type Window
 
-type QPainter
+extern type QPainter
 
 ///|
 type QColor
