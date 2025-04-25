@@ -37,28 +37,22 @@ struct Window : QWidget {
 
 using Bytes = FixedArray<Byte>;
 
-// // use explicit template instantiation
-// // https://github.com/llvm/llvm-project/issues/137282#issue-3018926539
-// namespace moonbit {
-// namespace basic_types {
-// extern template struct Ref<QApplication>;
-// extern template struct Ref<Window>;
-// extern template struct Ref<Window>;
-// extern template struct Ref<QPainter>;
-// extern template struct Ref<QColor>;
-// extern template struct Ref<QFont>;
-// extern template struct Ref<QFontMetricsF>;
-// extern template struct Ref<QPointF>;
-// extern template struct Ref<QRectF>;
-// extern template struct Ref<Int>;
-// extern template struct Ref<QStringList>;
-// } // namespace basic_types
-// namespace compound_types {
-// extern template struct FixedArray<Bytes>;
-// extern template struct FixedArray<Ref<QString>>;
-
-// } // namespace compound_types
-// } // namespace moonbit
+// use force template instantiation
+// https://github.com/llvm/llvm-project/issues/137282#issue-3018926539
+static void force_template_instantiation() {
+  { Ref<QApplication> _; }
+  { Ref<Window> _; }
+  { Ref<QPainter> _; }
+  { Ref<QColor> _; }
+  { Ref<QFont> _; }
+  { Ref<QFontMetricsF> _; }
+  { Ref<QPointF> _; }
+  { Ref<Int> _; }
+  { Ref<QStringList> _; }
+  { FixedArray<Bytes> _; }
+  { FixedArray<Ref<QString>> _; }
+  { FixedArray<Ref<QRectF>> _; }
+}
 
 extern "C" {
 
