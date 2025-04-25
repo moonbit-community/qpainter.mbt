@@ -8,8 +8,7 @@ type QApplication
 ///|
 type Window
 
-///| Don't store QPainter in other place, only use it in paintEvent
-extern type QPainter
+type QPainter
 
 ///|
 type QColor

@@ -1,7 +1,7 @@
 ///|
 /// 640 * 480 excluded title bar.
 #borrow(paint)
-extern "c" fn Window::new(paint : FuncRef[(QPainter) -> Unit]) -> Window = "illusory0x0_Window_new"
+extern "c" fn Window::new(paint : (QPainter) -> Unit) -> Window = "illusory0x0_Window_new"
 
 ///|
 #borrow(r,g,b,a)
