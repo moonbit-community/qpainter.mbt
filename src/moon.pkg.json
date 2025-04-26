@@ -15,5 +15,12 @@
     "main.mbt": [
       "native"
     ]
-  }
+  },
+  "pre-build": [
+    {
+      "input": "../stub",
+      "output": "../build/libqpainter_mbt.a",
+      "command": "make native_stub"
+    }
+  ]
 }

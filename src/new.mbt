@@ -1,7 +1,24 @@
 ///|
 /// 640 * 480 excluded title bar.
-#borrow(paint)
-extern "c" fn Window::new(paint : (QPainter) -> Unit) -> Window = "illusory0x0_Window_new"
+typealias PaintEventHandler = (QPainter) -> Unit
+
+///|
+typealias KeyEventHandler = (Int, KeyModifier) -> Unit
+
+///|
+typealias MouseEventHandler = (Double, Double, KeyModifier, MouseButton) -> Unit
+
+///|
+#borrow(paint, key_press, key_release)
+extern "c" fn Window::new(
+  paint~ : PaintEventHandler,
+  key_press~ : KeyEventHandler,
+  key_release~ : KeyEventHandler,
+  mouse_double_click~ : MouseEventHandler,
+  mouse_press~ : MouseEventHandler,
+  mouse_release~ : MouseEventHandler,
+  mouse_move~ : MouseEventHandler
+) -> Window = "illusory0x0_Window_new"
 
 ///|
 #borrow(r, g, b, a)

@@ -1,10 +1,10 @@
-#include <QApplication>
-#include <QFont>
-#include <QPainter>
-#include <QWidget>
-
 #include "moonbit_cxx_borrow.h"
 #include "type_holes.h"
+#include <QApplication>
+#include <QFont>
+#include <QKeyEvent>
+#include <QPainter>
+#include <QWidget>
 
 using namespace type_holes;
 using namespace moonbit::types;
@@ -14,13 +14,62 @@ using namespace moonbit::types;
 // illusory0x0_
 
 using PaintHandler = Closure<Unit, Extern<QPainter>>;
+using KeyModifier = Int;
+using MouseButton = Int;
+using KeyEventHandler = Closure<Unit, Int, KeyModifier>;
+using MouseEventHandler =
+    Closure<Unit, Double, Double, KeyModifier, MouseButton>;
 
 struct Window : QWidget {
   PaintHandler paint;
-  Window(PaintHandler p) : QWidget(), paint(p) {}
+  KeyEventHandler key_press;
+  KeyEventHandler key_release;
+  MouseEventHandler mouse_double_click;
+  MouseEventHandler mouse_press;
+  MouseEventHandler mouse_release;
+  MouseEventHandler mouse_move;
+  Window(PaintHandler p, KeyEventHandler kp, KeyEventHandler kr,
+         MouseEventHandler mp, MouseEventHandler mr, MouseEventHandler mdc,
+         MouseEventHandler mm)
+      : QWidget(), paint(p), key_press(kp), key_release(kr), mouse_press(mp),
+        mouse_release(mr), mouse_double_click(mdc), mouse_move(mm) {
+    this->setMouseTracking(true);
+  }
   virtual void paintEvent(QPaintEvent *event) noexcept override {
     let painter = QPainter{this};
     this->paint(Extern<QPainter>::from(&painter));
+  }
+  virtual void keyPressEvent(QKeyEvent *event) noexcept override {
+    call_key_event(this->key_press, event);
+  }
+  virtual void keyReleaseEvent(QKeyEvent *event) noexcept override {
+    call_key_event(this->key_release, event);
+  }
+  virtual void mousePressEvent(QMouseEvent *event) noexcept override {
+    call_mouse_event(this->mouse_press, event);
+  }
+  virtual void mouseReleaseEvent(QMouseEvent *event) noexcept override {
+    call_mouse_event(this->mouse_release, event);
+  }
+  virtual void mouseDoubleClickEvent(QMouseEvent *event) noexcept override {
+    call_mouse_event(this->mouse_double_click, event);
+  }
+  virtual void mouseMoveEvent(QMouseEvent *event) noexcept override {
+    call_mouse_event(this->mouse_move, event);
+  }
+  static void call_mouse_event(MouseEventHandler event_handler,
+                               QMouseEvent *event) noexcept {
+    let position = event->position();
+    let x = Double::from(position.x());
+    let y = Double::from(position.y());
+    let modifiers = Int::from(event->modifiers());
+    let button = Int::from(event->button());
+    event_handler(x, y, modifiers, button);
+  }
+  static void call_key_event(KeyEventHandler event_handler, QKeyEvent *event) {
+    let key = Int::from(event->key());
+    let modifiers = Int::from(event->modifiers());
+    event_handler(key, modifiers);
   }
   ~Window() = default;
 };
@@ -58,8 +107,11 @@ Ref<QApplication> illusory0x0_QApplication_new(Ref<Int> argc,
                                          ::std::bit_cast<char **>(argv));
 }
 
-Ref<Window> illusory0x0_Window_new(PaintHandler paint) {
-  return Ref<Window>::from_cxx_ref(paint);
+Ref<Window> illusory0x0_Window_new(PaintHandler p, KeyEventHandler kp,
+                                   KeyEventHandler kr, MouseEventHandler mp,
+                                   MouseEventHandler mr, MouseEventHandler mdc,
+                                   MouseEventHandler mm) {
+  return Ref<Window>::from_cxx_ref(p, kp, kr, mp, mr, mdc, mm);
 }
 
 Ref<QPainter> illusory0x0_QPainter_new(QPaintDevice *device) {
