@@ -1,4 +1,4 @@
-package "illusory0x0/qpainter"
+package "illusory0x0/qpainter/qpainter"
 
 // Values
 const Key_0 : Int = 0x30
