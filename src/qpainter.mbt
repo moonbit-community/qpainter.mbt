@@ -1,5 +1,5 @@
 ///|
-#borrow(self,x,y,w,h)
+#borrow(self, x, y, w, h)
 extern "c" fn QPainter::drawRect(
   self : QPainter,
   x : Double,
@@ -9,7 +9,7 @@ extern "c" fn QPainter::drawRect(
 ) -> Unit = "illusory0x0_QPainter_drawRect"
 
 ///|
-#borrow(self,x,y,text)
+#borrow(self, x, y, text)
 extern "c" fn QPainter::drawText(
   self : QPainter,
   x : Double,
@@ -18,13 +18,13 @@ extern "c" fn QPainter::drawText(
 ) -> Unit = "illusory0x0_QPainter_drawText"
 
 ///|
-#borrow(self,pen)
+#borrow(self, pen)
 extern "c" fn QPainter::setPen(self : QPainter, pen : QPen) -> Unit = "illusory0x0_QPainter_setPen"
 
 ///|
-#borrow(self,brush)
+#borrow(self, brush)
 extern "c" fn QPainter::setBrush(self : QPainter, brush : QBrush) -> Unit = "illusory0x0_QPainter_setBrush"
 
 ///|
-#borrow(self,font)
+#borrow(self, font)
 extern "c" fn QPainter::setFont(self : QPainter, font : QFont) -> Unit = "illusory0x0_QPainter_setFont"

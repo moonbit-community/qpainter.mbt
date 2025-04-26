@@ -12,9 +12,9 @@ fn main {
     painter.setPen(pen)
     painter.setFont(font)
     painter.drawRect(20, 20, 100, 100)
-    painter.drawText(200,150,text)
+    painter.drawText(200, 150, text)
   })
   window.show()
   let exit_code = QApplication::exec()
-  drop([window, app,exit_code])
+  drop([window, app, exit_code])
 }

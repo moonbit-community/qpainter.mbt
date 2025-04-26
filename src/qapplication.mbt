@@ -1,5 +1,5 @@
 ///|
-#borrow(argc,argv)
+#borrow(argc, argv)
 extern "c" fn QApplication::new(
   argc : Ref[Int],
   argv : FixedArray[Bytes]
