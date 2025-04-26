@@ -15,5 +15,12 @@
     "main.mbt": [
       "native"
     ]
-  }
+  },
+  "pre-build": [
+    {
+      "input": "../stub/stub.cxx",
+      "output": "../build/libruntime_mbt.a",
+      "command": "make native_stub"
+    }
+  ]
 }

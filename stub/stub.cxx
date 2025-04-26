@@ -37,6 +37,9 @@ struct Window : QWidget {
   }
   virtual void paintEvent(QPaintEvent *event) noexcept override {
     let painter = QPainter{this};
+    painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing |
+                               QPainter::SmoothPixmapTransform,
+                           true);
     this->paint(Extern<QPainter>::from(&painter));
   }
   virtual void keyPressEvent(QKeyEvent *event) noexcept override {
