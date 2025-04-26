@@ -1,46 +1,46 @@
 ///|
-type QApplication
+pub type QApplication
 
 ///|
-type Window
+pub type Window
 
 ///|
-extern type QPainter
+pub extern type QPainter
 
 ///|
-type QColor
+pub type QColor
 
 ///|
-type QString
+pub type QString
 
 ///|
-type QPen
+pub type QPen
 
 ///|
-type QBrush
+pub type QBrush
 
 ///|
-type QStringList
+pub type QStringList
 
 ///|
-type QPointF
+pub type QPointF
 
 ///|
-type QSizeF
+pub type QSizeF
 
 ///|
-type QRectF
+pub type QRectF
 
 ///|
-type QFont
+pub type QFont
 
 ///|
-type QFontMetricsF
+pub type QFontMetricsF
 
 ///|
-trait Drop {}
+pub(open) trait Drop {}
 
 ///|
-fn drop(xs : FixedArray[&Drop]) -> Unit {
+pub fn drop(xs : FixedArray[&Drop]) -> Unit {
 
 }

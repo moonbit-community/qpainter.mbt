@@ -939,6 +939,8 @@ const Key_ydiaeresis : Int = 0x0ff
 
 const Key_yen : Int = 0x0a5
 
+fn drop(FixedArray[&Drop]) -> Unit
+
 fn key_to_string(Int) -> String
 
 // Types and methods
@@ -948,38 +950,103 @@ impl Show for KeyModifier
 type MouseButton
 impl Show for MouseButton
 
-type QApplication
+pub type QApplication
+impl QApplication {
+  exec() -> Int
+  new(Ref[Int], FixedArray[Bytes]) -> Self
+}
 
-type QBrush
+pub type QBrush
+impl QBrush {
+  new(QColor) -> Self
+}
 
-type QColor
+pub type QColor
+impl QColor {
+  new(Int, Int, Int, Int) -> Self
+}
 
-type QFont
+pub type QFont
+impl QFont {
+  new(QStringList, Int, Int, Bool) -> Self
+}
 
-type QFontMetricsF
+pub type QFontMetricsF
+impl QFontMetricsF {
+  boundingRect(Self, String) -> QRectF
+  height(Self) -> Double
+  horizontalAdvance(Self, String) -> Double
+  inFontUsc4(Self) -> Bool
+}
 
-type QPainter
+pub extern type QPainter
+impl QPainter {
+  drawRect(Self, Double, Double, Double, Double) -> Unit
+  drawRoundedRect(Self, Double, Double, Double, Double, Double, Double) -> Unit
+  drawText(Self, Double, Double, QString) -> Unit
+  setBrush(Self, QBrush) -> Unit
+  setFont(Self, QFont) -> Unit
+  setPen(Self, QPen) -> Unit
+}
 
-type QPen
+pub type QPen
+impl QPen {
+  new(QBrush, Double) -> Self
+}
 
-type QPointF
+pub type QPointF
+impl QPointF {
+  new(Double, Double) -> Self
+  x(Self) -> Double
+  y(Self) -> Double
+}
 
-type QRectF
+pub type QRectF
+impl QRectF {
+  bottom(Self) -> Double
+  left(Self) -> Double
+  new(Double, Double, Double, Double) -> Self
+  right(Self) -> Double
+  top(Self) -> Double
+}
 
-type QSizeF
+pub type QSizeF
+impl QSizeF {
+  height(Self) -> Double
+  new(Double, Double) -> Self
+  width(Self) -> Double
+}
 
-type QString
+pub type QString
+impl QString {
+  from_builtin(String) -> Self
+  new(String) -> Self
+  to_string(Self) -> String
+}
 
-type QStringList
+pub type QStringList
+impl QStringList {
+  from_builtin(FixedArray[String]) -> Self
+  new(FixedArray[QString]) -> Self
+}
 
-type StdString
-
-type StdVector_StdString
-
-type Window
+pub type Window
+impl Window {
+  devicePixelRatio(Self) -> Int
+  height(Self) -> Int
+  new(paint~ : (QPainter) -> Unit, key_press~ : (Int, KeyModifier) -> Unit, key_release~ : (Int, KeyModifier) -> Unit, mouse_double_click~ : (Double, Double, KeyModifier, MouseButton) -> Unit, mouse_press~ : (Double, Double, KeyModifier, MouseButton) -> Unit, mouse_release~ : (Double, Double, KeyModifier, MouseButton) -> Unit, mouse_move~ : (Double, Double, KeyModifier, MouseButton) -> Unit) -> Self
+  show(Self) -> Unit
+  width(Self) -> Int
+}
 
 // Type aliases
+pub typealias KeyEventHandler = (Int, KeyModifier) -> Unit
+
+pub typealias MouseEventHandler = (Double, Double, KeyModifier, MouseButton) -> Unit
+
+pub typealias PaintEventHandler = (QPainter) -> Unit
 
 // Traits
-trait Drop
+pub(open) trait Drop {
+}
 
