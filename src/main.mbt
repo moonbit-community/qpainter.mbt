@@ -23,22 +23,42 @@ fn key_release(key : Int, modifier : KeyModifier) -> Unit {
 }
 
 ///|
-fn mouse_double_click(x : Double, y : Double, modifier : KeyModifier, button : MouseButton) -> Unit {
+fn mouse_double_click(
+  x : Double,
+  y : Double,
+  modifier : KeyModifier,
+  button : MouseButton
+) -> Unit {
 
 }
 
 ///|
-fn mouse_press(x : Double, y : Double, modifier : KeyModifier, button : MouseButton) -> Unit {
+fn mouse_press(
+  x : Double,
+  y : Double,
+  modifier : KeyModifier,
+  button : MouseButton
+) -> Unit {
   println("click: \{(x,y,modifier,button)}")
 }
 
 ///|
-fn mouse_release(x : Double, y : Double, modifier : KeyModifier, button : MouseButton) -> Unit {
+fn mouse_release(
+  x : Double,
+  y : Double,
+  modifier : KeyModifier,
+  button : MouseButton
+) -> Unit {
 
 }
 
 ///|
-fn mouse_move(x : Double, y : Double, modifier : KeyModifier, button : MouseButton) -> Unit {
+fn mouse_move(
+  x : Double,
+  y : Double,
+  modifier : KeyModifier,
+  button : MouseButton
+) -> Unit {
   // println("move: \{(x,y,modifier)}")
 }
 

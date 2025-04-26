@@ -2,8 +2,6 @@
 type QApplication
 
 ///|
-
-///|
 type Window
 
 ///|

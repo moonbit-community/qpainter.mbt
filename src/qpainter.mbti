@@ -939,9 +939,14 @@ const Key_ydiaeresis : Int = 0x0ff
 
 const Key_yen : Int = 0x0a5
 
+fn key_to_string(Int) -> String
+
 // Types and methods
-type Modifier
-impl Show for Modifier
+type KeyModifier
+impl Show for KeyModifier
+
+type MouseButton
+impl Show for MouseButton
 
 type QApplication
 
