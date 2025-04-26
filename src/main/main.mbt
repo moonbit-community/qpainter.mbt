@@ -1,4 +1,40 @@
 ///|
+typealias @qpainter.(
+  QPainter,
+  QFont,
+  QBrush,
+  QPen,
+  QColor,
+  QApplication,
+  Window,
+  KeyModifier,
+  MouseButton,
+  QStringList,
+  QString
+)
+
+///|
+fnalias @qpainter.(drop, key_to_string)
+
+///|
+fn main {
+  let argc : Ref[Int] = Ref::new(1)
+  let argv : FixedArray[Bytes] = [b"painter\x00"]
+  let app = QApplication::new(argc, argv)
+  let window = Window::new(
+    paint~,
+    key_press~,
+    key_release~,
+    mouse_double_click~,
+    mouse_press~,
+    mouse_release~,
+    mouse_move~,
+  )
+  window.show()
+  let exit_code = QApplication::exec()
+  drop([window, app, exit_code])
+}
+
 ///|
 fn paint(painter : QPainter) -> Unit {
   let font = QFont::new(QStringList::from_builtin(["楷体"]), 40, 320, false)
@@ -60,23 +96,4 @@ fn mouse_move(
   button : MouseButton
 ) -> Unit {
   // println("move: \{(x,y,modifier)}")
-}
-
-///|
-fn main {
-  let argc : Ref[Int] = Ref::new(1)
-  let argv : FixedArray[Bytes] = [b"painter\x00"]
-  let app = QApplication::new(argc, argv)
-  let window = Window::new(
-    paint~,
-    key_press~,
-    key_release~,
-    mouse_double_click~,
-    mouse_press~,
-    mouse_release~,
-    mouse_move~,
-  )
-  window.show()
-  let exit_code = QApplication::exec()
-  drop([window, app, exit_code])
 }

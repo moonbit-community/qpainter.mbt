@@ -18,9 +18,12 @@
   },
   "pre-build": [
     {
-      "input": "../stub/stub.cxx",
-      "output": "../build/libruntime_mbt.a",
+      "input": "../../stub/stub.cxx",
+      "output": "../../build/libruntime_mbt.a",
       "command": "make native_stub"
     }
+  ],
+  "import": [
+    "illusory0x0/qpainter/qpainter"
   ]
 }
