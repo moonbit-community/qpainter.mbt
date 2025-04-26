@@ -9,7 +9,7 @@ typealias KeyEventHandler = (Int, KeyModifier) -> Unit
 typealias MouseEventHandler = (Double, Double, KeyModifier, MouseButton) -> Unit
 
 ///|
-#borrow(paint, key_press, key_release)
+#borrow(paint, key_press, key_release, mouse_double_click, mouse_press, mouse_release, mouse_move)
 extern "c" fn Window::new(
   paint~ : PaintEventHandler,
   key_press~ : KeyEventHandler,
