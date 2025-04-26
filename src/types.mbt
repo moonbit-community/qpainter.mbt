@@ -3,11 +3,10 @@ type QApplication
 
 ///|
 
-
-
 ///|
 type Window
 
+///|
 extern type QPainter
 
 ///|
@@ -34,15 +33,16 @@ type QSizeF
 ///|
 type QRectF
 
+///|
+type QFont
 
-type QFont 
+///|
+type QFontMetricsF
 
+///|
+trait Drop {}
 
-type QFontMetricsF 
-
-
-trait Drop { }
-
+///|
 fn drop(xs : FixedArray[&Drop]) -> Unit {
 
 }
