@@ -1,13 +1,19 @@
 {
   "name": "illusory0x0/qpainter",
   "version": "0.1.0",
-  "deps": {
-    "illusory0x0/native": "0.1.3"
-  },
   "readme": "README.md",
-  "repository": "",
+  "repository": "https://github.com/illusory0x0/qpainter.mbt",
   "license": "Apache-2.0",
-  "keywords": [],
-  "description": "",
+  "keywords": [
+    "Qt6",
+    "Qt",
+    "GUI",
+    "QPainter",
+    "canvas",
+    "native",
+    "FFI",
+    "C++ FFI"
+  ],
+  "description": "Moonbit FFI Bindings for Qt's QPainter",
   "source": "src"
 }
