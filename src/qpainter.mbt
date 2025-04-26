@@ -29,7 +29,8 @@ extern "c" fn QPainter::setBrush(self : QPainter, brush : QBrush) -> Unit = "ill
 #borrow(self, font)
 extern "c" fn QPainter::setFont(self : QPainter, font : QFont) -> Unit = "illusory0x0_QPainter_setFont"
 
-#borrow(self, x, y, w, h,xRadius,yRadius)
+///|
+#borrow(self, x, y, w, h, xRadius, yRadius)
 extern "c" fn QPainter::drawRoundedRect(
   self : QPainter,
   x : Double,
