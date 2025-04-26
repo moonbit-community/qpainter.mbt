@@ -8,7 +8,7 @@ fn paint(painter : QPainter) -> Unit {
   painter.setBrush(brush)
   painter.setPen(pen)
   painter.setFont(font)
-  painter.drawRect(20, 20, 100, 100)
+  painter.drawRoundedRect(20, 20, 100, 100, 20, 20)
   painter.drawText(200, 150, text)
 }
 

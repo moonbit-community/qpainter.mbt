@@ -199,6 +199,11 @@ void illusory0x0_QPainter_drawText(Ref<QPainter> self, double x, double y,
                                    Ref<QString> text) {
   self->drawText(QPointF(x, y), *text);
 }
+void illusory0x0_QPainter_drawRoundedRect(Ref<QPainter> self, double x,
+                                          double y, double w, double h,
+                                          double xRadius, double yRadius) {
+  self->drawRoundedRect(QRectF(x, y, w, h), xRadius, yRadius);
+}
 
 void illusory0x0_QPainter_save(Ref<QPainter> self) { self->save(); }
 void illusory0x0_QPainter_restore(Ref<QPainter> self) { self->restore(); }
