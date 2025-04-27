@@ -13,3 +13,7 @@ pub extern "c" fn Window::height(self : Window) -> Int = "illusory0x0_Window_hei
 ///|
 #borrow(self)
 pub extern "c" fn Window::devicePixelRatio(self : Window) -> Int = "illusory0x0_Window_devicePixelRatio"
+
+///|
+#borrow(self)
+pub extern "c" fn Window::update(self : Window) = "illusory0x0_Window_update"

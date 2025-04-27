@@ -265,5 +265,6 @@ double illusory0x0_Window_devicePixelRatioF(Ref<Window> self) {
   return self->devicePixelRatioF();
 }
 int32_t illusory0x0_QApplication_exec() { return QApplication::exec(); }
+void illusory0x0_Window_update(Ref<Window> self) { self->update(); }
 
 } // namespace end
