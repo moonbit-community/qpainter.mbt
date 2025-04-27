@@ -50,15 +50,18 @@ fn paint(painter : QPainter) -> Unit {
   let m = QFontMetricsF::new(font)
   println(m.height())
   println(m.horizontalAdvance(QString::from_builtin("hello")))
+  println("paint")
 }
 
 ///|
 fn key_press(key : Int, modifier : KeyModifier) -> Unit {
+  println("key press")
   println("key: \{(key_to_string(key),modifier)}")
 }
 
 ///|
 fn key_release(key : Int, modifier : KeyModifier) -> Unit {
+  println("key release")
 
 }
 
@@ -69,6 +72,7 @@ fn mouse_double_click(
   modifier : KeyModifier,
   button : MouseButton
 ) -> Unit {
+  println("double click")
 
 }
 
@@ -79,6 +83,7 @@ fn mouse_press(
   modifier : KeyModifier,
   button : MouseButton
 ) -> Unit {
+  println("mouse press")
   println("click: \{(x,y,modifier,button)}")
 }
 
@@ -89,6 +94,7 @@ fn mouse_release(
   modifier : KeyModifier,
   button : MouseButton
 ) -> Unit {
+  println("mouse_release")
 
 }
 
