@@ -23,7 +23,8 @@
 
 extern "C" {
 #include <moonbit.h> // moonbit.h now doesn't support C++ FFI
-MOONBIT_EXPORT void *moonbit_malloc_array(enum moonbit_block_kind kind, int elem_size_shift, int32_t len);
+MOONBIT_EXPORT void *moonbit_malloc_array(enum moonbit_block_kind kind,
+                                          int elem_size_shift, int32_t len);
 }
 
 #undef DeriveNewtypeFrom
@@ -132,47 +133,44 @@ template <abi::moonbit T, typename Kind> struct Option;
 
 } // namespace compound_types
 
-
 namespace basic_concepts {
-  template <typename T>
-  concept integer = ast_match::integer<T>::value;
-  
-  template <typename T>
-  concept floating_point = ast_match::floating_point<T>::value;
-  
-  template <typename T>
-  concept reference =
-      sizeof(T) == abi::pointer_size && ast_match::moonbit_meta<T>::value &&
-      requires(T t) { ::std::is_pointer_v<typename T::Repr>; };
-  
-  } // namespace basic_concepts
-  
-  namespace compound_concepts {
-  namespace basic = basic_concepts;
-  template <typename T>
-  concept arithmetic = basic::integer<T> || basic::floating_point<T>;
-  
-  template <typename T>
-  concept scalar = arithmetic<T> || ast_match::scalar_misc<T>::value;
-  } // namespace compound_concepts
-  
-  namespace concepts {
-  using namespace basic_concepts;
-  using namespace compound_concepts;
-  } // namespace concepts
+template <typename T>
+concept integer = ast_match::integer<T>::value;
 
-  
-  
+template <typename T>
+concept floating_point = ast_match::floating_point<T>::value;
+
+template <typename T>
+concept reference =
+    sizeof(T) == abi::pointer_size && ast_match::moonbit_meta<T>::value &&
+    requires(T t) { ::std::is_pointer_v<typename T::Repr>; };
+
+} // namespace basic_concepts
+
+namespace compound_concepts {
+namespace basic = basic_concepts;
+template <typename T>
+concept arithmetic = basic::integer<T> || basic::floating_point<T>;
+
+template <typename T>
+concept scalar = arithmetic<T> || ast_match::scalar_misc<T>::value;
+} // namespace compound_concepts
+
+namespace concepts {
+using namespace basic_concepts;
+using namespace compound_concepts;
+} // namespace concepts
+
 namespace persistent_types {
-  template <abi::moonbit T>
-    requires(concepts::reference<T>)
-  struct Rc;
-  }
+template <abi::moonbit T>
+  requires(concepts::reference<T>)
+struct Rc;
+}
 
 namespace types {
-  using namespace basic_types;
-  using namespace compound_types;
-  using namespace persistent_types;
-  } // namespace types
+using namespace basic_types;
+using namespace compound_types;
+using namespace persistent_types;
+} // namespace types
 
 } // namespace moonbit
