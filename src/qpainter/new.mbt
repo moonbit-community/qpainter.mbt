@@ -1,11 +1,17 @@
 ///|
-pub typealias PaintEventHandler = (QPainter) -> Unit
+pub typealias PaintEventHandler = (Window, QPainter) -> Unit
 
 ///|
-pub typealias KeyEventHandler = (Int, KeyModifier) -> Unit
+pub typealias KeyEventHandler = (Window, Int, KeyModifier) -> Unit
 
 ///|
-pub typealias MouseEventHandler = (Double, Double, KeyModifier, MouseButton) -> Unit
+pub typealias MouseEventHandler = (
+  Window,
+  Double,
+  Double,
+  KeyModifier,
+  MouseButton,
+) -> Unit
 
 ///|
 /// 640 * 480 excluded title bar.

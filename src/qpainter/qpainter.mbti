@@ -1035,17 +1035,18 @@ pub type Window
 impl Window {
   devicePixelRatio(Self) -> Int
   height(Self) -> Int
-  new(paint~ : (QPainter) -> Unit, key_press~ : (Int, KeyModifier) -> Unit, key_release~ : (Int, KeyModifier) -> Unit, mouse_double_click~ : (Double, Double, KeyModifier, MouseButton) -> Unit, mouse_press~ : (Double, Double, KeyModifier, MouseButton) -> Unit, mouse_release~ : (Double, Double, KeyModifier, MouseButton) -> Unit, mouse_move~ : (Double, Double, KeyModifier, MouseButton) -> Unit) -> Self
+  new(paint~ : (Self, QPainter) -> Unit, key_press~ : (Self, Int, KeyModifier) -> Unit, key_release~ : (Self, Int, KeyModifier) -> Unit, mouse_press~ : (Self, Double, Double, KeyModifier, MouseButton) -> Unit, mouse_release~ : (Self, Double, Double, KeyModifier, MouseButton) -> Unit, mouse_double_click~ : (Self, Double, Double, KeyModifier, MouseButton) -> Unit, mouse_move~ : (Self, Double, Double, KeyModifier, MouseButton) -> Unit) -> Self
   show(Self) -> Unit
+  update(Self) -> Unit
   width(Self) -> Int
 }
 
 // Type aliases
-pub typealias KeyEventHandler = (Int, KeyModifier) -> Unit
+pub typealias KeyEventHandler = (Window, Int, KeyModifier) -> Unit
 
-pub typealias MouseEventHandler = (Double, Double, KeyModifier, MouseButton) -> Unit
+pub typealias MouseEventHandler = (Window, Double, Double, KeyModifier, MouseButton) -> Unit
 
-pub typealias PaintEventHandler = (QPainter) -> Unit
+pub typealias PaintEventHandler = (Window, QPainter) -> Unit
 
 // Traits
 pub(open) trait Drop {

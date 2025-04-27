@@ -12,12 +12,15 @@ using namespace moonbit::types;
 
 // illusory0x0_
 
-using PaintHandler = Closure<Unit, Extern<QPainter>>;
+struct Window;
+
 using KeyModifier = Int;
 using MouseButton = Int;
-using KeyEventHandler = Closure<Unit, Int, KeyModifier>;
+
+using PaintHandler = Closure<Unit, Ref<Window>, Extern<QPainter>>;
+using KeyEventHandler = Closure<Unit, Ref<Window>, Int, KeyModifier>;
 using MouseEventHandler =
-    Closure<Unit, Double, Double, KeyModifier, MouseButton>;
+    Closure<Unit, Ref<Window>, Double, Double, KeyModifier, MouseButton>;
 
 struct Window : QWidget {
   Rc<PaintHandler> paint;
@@ -39,7 +42,8 @@ struct Window : QWidget {
     painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing |
                                QPainter::SmoothPixmapTransform,
                            true);
-    (this->paint.repr)(Extern<QPainter>::from(&painter));
+    (this->paint.repr)(Ref<Window>::from_this(this),
+                       Extern<QPainter>::from(&painter));
   }
   virtual void keyPressEvent(QKeyEvent *event) noexcept override {
     call_key_event(this->key_press.repr, event);
@@ -59,19 +63,19 @@ struct Window : QWidget {
   virtual void mouseMoveEvent(QMouseEvent *event) noexcept override {
     call_mouse_event(this->mouse_move.repr, event);
   }
-  static void call_mouse_event(MouseEventHandler event_handler,
-                               QMouseEvent *event) noexcept {
+  void call_mouse_event(MouseEventHandler event_handler,
+                        QMouseEvent *event) noexcept {
     let position = event->position();
     let x = Double::from(position.x());
     let y = Double::from(position.y());
     let modifiers = Int::from(event->modifiers());
     let button = Int::from(event->button());
-    event_handler(x, y, modifiers, button);
+    event_handler(Ref<Window>::from_this(this), x, y, modifiers, button);
   }
-  static void call_key_event(KeyEventHandler event_handler, QKeyEvent *event) {
+  void call_key_event(KeyEventHandler event_handler, QKeyEvent *event) {
     let key = Int::from(event->key());
     let modifiers = Int::from(event->modifiers());
-    event_handler(key, modifiers);
+    event_handler(Ref<Window>::from_this(this), key, modifiers);
   }
   ~Window() noexcept = default;
 };

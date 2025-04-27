@@ -166,6 +166,7 @@ template <typename T> struct Ref : Base<Ref<T>> {
     void *obj = moonbit_make_external_object(Ref<T>::finalizer, sizeof(T));
     return {.repr = new (obj) T{(args)...}};
   }
+  static Ref<T> from_this(T *ptr) noexcept { return {.repr = ptr}; }
 };
 
 } // namespace moonbit::basic_types

@@ -37,7 +37,7 @@ fn main {
 }
 
 ///|
-fn paint(painter : QPainter) -> Unit {
+fn paint(win : Window, painter : QPainter) -> Unit {
   let font = QFont::new(QStringList::from_builtin(["楷体"]), 40, 320, false)
   let text = QString::from_builtin("你好")
   let brush = QBrush::new(QColor::new(255, 0, 0, 255))
@@ -54,30 +54,30 @@ fn paint(painter : QPainter) -> Unit {
 }
 
 ///|
-fn key_press(key : Int, modifier : KeyModifier) -> Unit {
+fn key_press(win : Window, key : Int, modifier : KeyModifier) -> Unit {
   println("key press")
   println("key: \{(key_to_string(key),modifier)}")
 }
 
 ///|
-fn key_release(key : Int, modifier : KeyModifier) -> Unit {
+fn key_release(win : Window, key : Int, modifier : KeyModifier) -> Unit {
   println("key release")
-
 }
 
 ///|
 fn mouse_double_click(
+  win : Window,
   x : Double,
   y : Double,
   modifier : KeyModifier,
   button : MouseButton
 ) -> Unit {
   println("double click")
-
 }
 
 ///|
 fn mouse_press(
+  win : Window,
   x : Double,
   y : Double,
   modifier : KeyModifier,
@@ -89,17 +89,18 @@ fn mouse_press(
 
 ///|
 fn mouse_release(
+  win : Window,
   x : Double,
   y : Double,
   modifier : KeyModifier,
   button : MouseButton
 ) -> Unit {
   println("mouse_release")
-
 }
 
 ///|
 fn mouse_move(
+  win : Window,
   x : Double,
   y : Double,
   modifier : KeyModifier,
