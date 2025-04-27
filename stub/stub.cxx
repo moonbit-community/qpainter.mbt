@@ -238,16 +238,16 @@ Bool illusory0x0_QFontMetricsF_inFontUcs4(Ref<QFontMetricsF> self,
   return Bool::from(self->inFontUcs4(codepoint.repr));
 }
 
-Ref<QRectF> illusory0x0_QFontMetricsF_boundingRect(Ref<QFontMetrics> self,
+Ref<QRectF> illusory0x0_QFontMetricsF_boundingRect(Ref<QFontMetricsF> self,
                                                    Ref<QString> text) {
   return Ref<QRectF>::from_cxx_ref(self->boundingRect(*text));
 }
 
-double illusory0x0_QFontMetricsF_horizontalAdvance(Ref<QFontMetrics> self,
+double illusory0x0_QFontMetricsF_horizontalAdvance(Ref<QFontMetricsF> self,
                                                    Ref<QString> text) {
   return self->horizontalAdvance(*text);
 }
-double illusory0x0_QFontMetricsF_height(Ref<QFontMetrics> self) {
+double illusory0x0_QFontMetricsF_height(Ref<QFontMetricsF> self) {
   return self->height();
 }
 
