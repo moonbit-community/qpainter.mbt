@@ -33,6 +33,13 @@ struct Window : QWidget {
          MouseEventHandler mm)
       : QWidget(), paint(p), key_press(kp), key_release(kr), mouse_press(mp),
         mouse_release(mr), mouse_double_click(mdc), mouse_move(mm) {
+    this->key_press.increment_strong_count();
+    this->key_release.increment_strong_count();
+    this->mouse_press.increment_strong_count();
+    this->mouse_release.increment_strong_count();
+    this->mouse_double_click.increment_strong_count();
+    this->mouse_move.increment_strong_count();
+    this->paint.increment_strong_count();
     this->setMouseTracking(true);
   }
   virtual void paintEvent(QPaintEvent *event) noexcept override {
@@ -74,7 +81,15 @@ struct Window : QWidget {
     let modifiers = Int::from(event->modifiers());
     event_handler(key, modifiers);
   }
-  ~Window() = default;
+  ~Window() noexcept {
+    this->paint.decrement_strong_count();
+    this->key_press.decrement_strong_count();
+    this->key_release.decrement_strong_count();
+    this->mouse_press.decrement_strong_count();
+    this->mouse_release.decrement_strong_count();
+    this->mouse_double_click.decrement_strong_count();
+    this->mouse_move.decrement_strong_count();
+  }
 };
 
 using Bytes = FixedArray<Byte>;

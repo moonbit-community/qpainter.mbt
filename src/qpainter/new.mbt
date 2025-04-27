@@ -14,9 +14,9 @@ pub extern "c" fn Window::new(
   paint~ : PaintEventHandler,
   key_press~ : KeyEventHandler,
   key_release~ : KeyEventHandler,
-  mouse_double_click~ : MouseEventHandler,
-  mouse_press~ : MouseEventHandler,
   mouse_release~ : MouseEventHandler,
+  mouse_press~ : MouseEventHandler,
+  mouse_double_click~ : MouseEventHandler,
   mouse_move~ : MouseEventHandler
 ) -> Window = "illusory0x0_Window_new"
 
