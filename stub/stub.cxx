@@ -20,25 +20,18 @@ using MouseEventHandler =
     Closure<Unit, Double, Double, KeyModifier, MouseButton>;
 
 struct Window : QWidget {
-  PaintHandler paint;
-  KeyEventHandler key_press;
-  KeyEventHandler key_release;
-  MouseEventHandler mouse_double_click;
-  MouseEventHandler mouse_press;
-  MouseEventHandler mouse_release;
-  MouseEventHandler mouse_move;
+  Rc<PaintHandler> paint;
+  Rc<KeyEventHandler> key_press;
+  Rc<KeyEventHandler> key_release;
+  Rc<MouseEventHandler> mouse_double_click;
+  Rc<MouseEventHandler> mouse_press;
+  Rc<MouseEventHandler> mouse_release;
+  Rc<MouseEventHandler> mouse_move;
   Window(PaintHandler p, KeyEventHandler kp, KeyEventHandler kr,
          MouseEventHandler mp, MouseEventHandler mr, MouseEventHandler mdc,
          MouseEventHandler mm)
       : QWidget(), paint(p), key_press(kp), key_release(kr), mouse_press(mp),
         mouse_release(mr), mouse_double_click(mdc), mouse_move(mm) {
-    this->key_press.increment_strong_count();
-    this->key_release.increment_strong_count();
-    this->mouse_press.increment_strong_count();
-    this->mouse_release.increment_strong_count();
-    this->mouse_double_click.increment_strong_count();
-    this->mouse_move.increment_strong_count();
-    this->paint.increment_strong_count();
     this->setMouseTracking(true);
   }
   virtual void paintEvent(QPaintEvent *event) noexcept override {
@@ -46,25 +39,25 @@ struct Window : QWidget {
     painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing |
                                QPainter::SmoothPixmapTransform,
                            true);
-    this->paint(Extern<QPainter>::from(&painter));
+    (this->paint.repr)(Extern<QPainter>::from(&painter));
   }
   virtual void keyPressEvent(QKeyEvent *event) noexcept override {
-    call_key_event(this->key_press, event);
+    call_key_event(this->key_press.repr, event);
   }
   virtual void keyReleaseEvent(QKeyEvent *event) noexcept override {
-    call_key_event(this->key_release, event);
+    call_key_event(this->key_release.repr, event);
   }
   virtual void mousePressEvent(QMouseEvent *event) noexcept override {
-    call_mouse_event(this->mouse_press, event);
+    call_mouse_event(this->mouse_press.repr, event);
   }
   virtual void mouseReleaseEvent(QMouseEvent *event) noexcept override {
-    call_mouse_event(this->mouse_release, event);
+    call_mouse_event(this->mouse_release.repr, event);
   }
   virtual void mouseDoubleClickEvent(QMouseEvent *event) noexcept override {
-    call_mouse_event(this->mouse_double_click, event);
+    call_mouse_event(this->mouse_double_click.repr, event);
   }
   virtual void mouseMoveEvent(QMouseEvent *event) noexcept override {
-    call_mouse_event(this->mouse_move, event);
+    call_mouse_event(this->mouse_move.repr, event);
   }
   static void call_mouse_event(MouseEventHandler event_handler,
                                QMouseEvent *event) noexcept {
@@ -80,15 +73,7 @@ struct Window : QWidget {
     let modifiers = Int::from(event->modifiers());
     event_handler(key, modifiers);
   }
-  ~Window() noexcept {
-    this->paint.decrement_strong_count();
-    this->key_press.decrement_strong_count();
-    this->key_release.decrement_strong_count();
-    this->mouse_press.decrement_strong_count();
-    this->mouse_release.decrement_strong_count();
-    this->mouse_double_click.decrement_strong_count();
-    this->mouse_move.decrement_strong_count();
-  }
+  ~Window() noexcept = default;
 };
 
 using Bytes = FixedArray<Byte>;
@@ -120,8 +105,8 @@ extern "C" {
 // constructors
 Ref<QApplication> illusory0x0_QApplication_new(Ref<Int> argc,
                                                FixedArray<Bytes> argv) {
-  return Ref<QApplication>::from<int&>(argc.repr->repr,
-                                         ::std::bit_cast<char **>(argv));
+  return Ref<QApplication>::from<int &>(argc.repr->repr,
+                                        ::std::bit_cast<char **>(argv));
 }
 
 Ref<Window> illusory0x0_Window_new(PaintHandler p, KeyEventHandler kp,
@@ -140,8 +125,7 @@ Ref<QColor> illusory0x0_QColor_new(Int r, Int g, Int b, Int a) {
 }
 
 Ref<QString> illusory0x0_QString_new(String str) {
-  return Ref<QString>::from(::std::bit_cast<QChar *>(str),
-                                    str.length().repr);
+  return Ref<QString>::from(::std::bit_cast<QChar *>(str), str.length().repr);
 }
 
 Ref<QBrush> illusory0x0_QBrush_new(Ref<QColor> color) {
@@ -168,7 +152,7 @@ Ref<QFont> illusory0x0_QFont_new(Ref<QStringList> families, Int size,
                                  Int weight, Bool italic) {
 
   return Ref<QFont>::from(*families.repr, size.repr, weight.repr,
-                                  (bool)italic.repr);
+                          (bool)italic.repr);
 }
 Ref<QRectF> illusory0x0_QRectF_new(Double x, Double y, Double w, Double h) {
   return Ref<QRectF>::from(x.repr, y.repr, w.repr, h.repr);
