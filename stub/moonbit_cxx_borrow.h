@@ -162,17 +162,9 @@ template <typename T> struct Ref : Base<Ref<T>> {
 
   template <typename... Args>
     requires(::std::constructible_from<T, Args...>)
-  static Ref<T> from_cxx_ref(Args &&...args) noexcept {
-    void *obj = moonbit_make_external_object(Ref<T>::finalizer, sizeof(T));
-    return {.repr = new (obj) T{std::forward<Args>(args)...}};
-  }
-
-  template <abi::moonbit... Args>
-    requires(::std::constructible_from<T, typename Args::Repr...>)
   static Ref<T> from(Args... args) noexcept {
-    void *obj =
-        moonbit_make_external_object(Ref<T>::finalizer, sizeof(T));
-    return {.repr = new (obj) T{(args.repr)...}};
+    void *obj = moonbit_make_external_object(Ref<T>::finalizer, sizeof(T));
+    return {.repr = new (obj) T{(args)...}};
   }
 };
 

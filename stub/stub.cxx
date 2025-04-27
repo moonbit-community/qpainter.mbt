@@ -8,7 +8,6 @@
 
 using namespace type_holes;
 using namespace moonbit::types;
-
 #define let auto
 
 // illusory0x0_
@@ -121,7 +120,7 @@ extern "C" {
 // constructors
 Ref<QApplication> illusory0x0_QApplication_new(Ref<Int> argc,
                                                FixedArray<Bytes> argv) {
-  return Ref<QApplication>::from_cxx_ref(argc->repr,
+  return Ref<QApplication>::from<int&>(argc.repr->repr,
                                          ::std::bit_cast<char **>(argv));
 }
 
@@ -129,35 +128,35 @@ Ref<Window> illusory0x0_Window_new(PaintHandler p, KeyEventHandler kp,
                                    KeyEventHandler kr, MouseEventHandler mp,
                                    MouseEventHandler mr, MouseEventHandler mdc,
                                    MouseEventHandler mm) {
-  return Ref<Window>::from_cxx_ref(p, kp, kr, mp, mr, mdc, mm);
+  return Ref<Window>::from(p, kp, kr, mp, mr, mdc, mm);
 }
 
 Ref<QPainter> illusory0x0_QPainter_new(QPaintDevice *device) {
-  return Ref<QPainter>::from_cxx_ref(device);
+  return Ref<QPainter>::from(device);
 }
 
 Ref<QColor> illusory0x0_QColor_new(Int r, Int g, Int b, Int a) {
-  return Ref<QColor>::from(r, g, b, a);
+  return Ref<QColor>::from(r.repr, g.repr, b.repr, a.repr);
 }
 
 Ref<QString> illusory0x0_QString_new(String str) {
-  return Ref<QString>::from_cxx_ref(::std::bit_cast<QChar *>(str),
+  return Ref<QString>::from(::std::bit_cast<QChar *>(str),
                                     str.length().repr);
 }
 
 Ref<QBrush> illusory0x0_QBrush_new(Ref<QColor> color) {
-  return Ref<QBrush>::from_cxx_ref(*color.repr);
+  return Ref<QBrush>::from(*color.repr);
 }
 Ref<QPen> illusory0x0_QPen_new(Ref<QBrush> brush, Double width) {
-  return Ref<QPen>::from_cxx_ref(*brush.repr, width.repr);
+  return Ref<QPen>::from(*brush.repr, width.repr);
 }
 Ref<QFontMetricsF> illusory0x0_QFontMetricsF_new(Ref<QFont> font) {
-  return Ref<QFontMetricsF>::from_cxx_ref(*font.repr);
+  return Ref<QFontMetricsF>::from(*font.repr);
 }
 
 Ref<QStringList> illusory0x0_QStringList_new(FixedArray<Ref<QString>> xs) {
   using namespace moonbit::operators;
-  let res = Ref<QStringList>::from(xs.length());
+  let res = Ref<QStringList>::from(xs.length().repr);
   let len = xs.length();
   for (let i = Int::from(0); i < len; i = i + Int::from(1)) {
     (*res)[i.repr] = *xs[i];
@@ -168,18 +167,18 @@ Ref<QStringList> illusory0x0_QStringList_new(FixedArray<Ref<QString>> xs) {
 Ref<QFont> illusory0x0_QFont_new(Ref<QStringList> families, Int size,
                                  Int weight, Bool italic) {
 
-  return Ref<QFont>::from_cxx_ref(*families.repr, size.repr, weight.repr,
+  return Ref<QFont>::from(*families.repr, size.repr, weight.repr,
                                   (bool)italic.repr);
 }
 Ref<QRectF> illusory0x0_QRectF_new(Double x, Double y, Double w, Double h) {
-  return Ref<QRectF>::from(x, y, w, h);
+  return Ref<QRectF>::from(x.repr, y.repr, w.repr, h.repr);
 }
 Ref<QSizeF> illusory0x0_QSizeF_new(Double w, Double h) {
-  return Ref<QSizeF>::from(w, h);
+  return Ref<QSizeF>::from(w.repr, h.repr);
   // return Ref
 }
 Ref<QPointF> illusory0x0_QPointF_new(Double x, Double y) {
-  return Ref<QPointF>::from(x, y);
+  return Ref<QPointF>::from(x.repr, y.repr);
 }
 // conversion
 moonbit_string_t illusory0x0_QString_to_moonbit_string(Ref<QString> self) {
@@ -240,7 +239,7 @@ Bool illusory0x0_QFontMetricsF_inFontUcs4(Ref<QFontMetricsF> self,
 
 Ref<QRectF> illusory0x0_QFontMetricsF_boundingRect(Ref<QFontMetricsF> self,
                                                    Ref<QString> text) {
-  return Ref<QRectF>::from_cxx_ref(self->boundingRect(*text));
+  return Ref<QRectF>::from(self->boundingRect(*text));
 }
 
 double illusory0x0_QFontMetricsF_horizontalAdvance(Ref<QFontMetricsF> self,
