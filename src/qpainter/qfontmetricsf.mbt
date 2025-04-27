@@ -2,14 +2,14 @@
 #borrow(self, text)
 pub extern "c" fn QFontMetricsF::horizontalAdvance(
   self : QFontMetricsF,
-  text : String
+  text : QString
 ) -> Double = "illusory0x0_QFontMetricsF_horizontalAdvance"
 
 ///|
 #borrow(self, text)
 pub extern "c" fn QFontMetricsF::boundingRect(
   self : QFontMetricsF,
-  text : String
+  text : QString
 ) -> QRectF = "illusory0x0_QFontMetricsF_boundingRect"
 
 ///|

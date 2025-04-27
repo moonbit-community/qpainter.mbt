@@ -973,10 +973,11 @@ impl QFont {
 
 pub type QFontMetricsF
 impl QFontMetricsF {
-  boundingRect(Self, String) -> QRectF
+  boundingRect(Self, QString) -> QRectF
   height(Self) -> Double
-  horizontalAdvance(Self, String) -> Double
+  horizontalAdvance(Self, QString) -> Double
   inFontUsc4(Self) -> Bool
+  new(QFont) -> Self
 }
 
 pub extern type QPainter

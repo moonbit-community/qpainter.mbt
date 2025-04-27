@@ -10,7 +10,8 @@ typealias @qpainter.(
   KeyModifier,
   MouseButton,
   QStringList,
-  QString
+  QString,
+  QFontMetricsF
 )
 
 ///|
@@ -46,6 +47,9 @@ fn paint(painter : QPainter) -> Unit {
   painter.setFont(font)
   painter.drawRoundedRect(20, 20, 100, 100, 20, 20)
   painter.drawText(200, 150, text)
+  let m = QFontMetricsF::new(font)
+  println(m.height())
+  println(m.horizontalAdvance(QString::from_builtin("hello")))
 }
 
 ///|

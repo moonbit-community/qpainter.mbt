@@ -65,3 +65,7 @@ pub extern "c" fn QFont::new(
   weight : Int,
   italic : Bool
 ) -> QFont = "illusory0x0_QFont_new"
+
+///|
+#borrow(font)
+pub extern "c" fn QFontMetricsF::new(font : QFont) -> QFontMetricsF = "illusory0x0_QFontMetricsF_new"
