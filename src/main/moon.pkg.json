@@ -4,7 +4,7 @@
   "link": {
     "native": {
       "cc": "gcc",
-      "cc-flags": "-fsanitize=address -fsanitize=undefined",
+      "cc-flags": "-fwrapv -fsanitize=address -fsanitize=undefined",
       "cc-link-flags": "-Lbuild -lqpainter_mbt -lQt6Core -lQt6Gui -lQt6Widgets -lstdc++"
     }
   },
