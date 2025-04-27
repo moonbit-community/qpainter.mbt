@@ -3,6 +3,9 @@
 a QPainter FFI binding.
 
 
+https://github.com/user-attachments/assets/7bf54e83-af97-4696-811e-e9e032dcc787
+
+
 ## Support C++ class (partialy method)
 
 ### QtCore
