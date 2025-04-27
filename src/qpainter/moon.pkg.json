@@ -1,3 +1,21 @@
 {
-  "supported-targets": ["native"]
+  "supported-targets": ["native"],
+  "targets": {
+    "key.mbt": ["native"],
+    "keymodifier.mbt": ["native"],
+    "key_to_string.mbt": ["native"],
+    "mousebutton.mbt": ["native"],
+    "new.mbt": ["native"],
+    "qapplication.mbt": ["native"],
+    "qfont.mbt": ["native"],
+    "qfontmetricsf.mbt": ["native"],
+    "qpainter.mbt": ["native"],
+    "qpointf.mbt": ["native"],
+    "qrectf.mbt": ["native"],
+    "qsizef.mbt": ["native"],
+    "qstringlist.mbt": ["native"],
+    "qstring.mbt": ["native"],
+    "types.mbt": ["native"],
+    "window.mbt": ["native"]
+  }
 }
