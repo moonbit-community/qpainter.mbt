@@ -1,9 +1,6 @@
 {
   "is-main": true,
-  "warn-list": "-1-2-3-5-6-7-8-10-29",
-  "supported-targets": [
-    "native"
-  ],
+  "import": ["illusory0x0/qpainter/qpainter"],
   "link": {
     "native": {
       "cc": "gcc",
@@ -11,11 +8,7 @@
       "cc-link-flags": "-Lbuild -lqpainter_mbt -lQt6Core -lQt6Gui -lQt6Widgets -lstdc++"
     }
   },
-  "targets": {
-    "main.mbt": [
-      "native"
-    ]
-  },
+
   "pre-build": [
     {
       "input": "../../stub/stub.cxx",
@@ -23,7 +16,8 @@
       "command": "make native_stub"
     }
   ],
-  "import": [
-    "illusory0x0/qpainter/qpainter"
-  ]
+  "supported-targets": ["native"],
+  "targets": {
+    "main.mbt": ["native"]
+  }
 }
