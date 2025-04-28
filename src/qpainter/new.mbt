@@ -14,8 +14,11 @@ pub typealias MouseEventHandler = (
 ) -> Unit
 
 ///|
+pub typealias ResizeEventHandler = (Window, Int, Int) -> Unit
+
+///|
 /// 640 * 480 excluded title bar.
-#borrow(paint, key_press, key_release, mouse_double_click, mouse_press, mouse_release, mouse_move)
+#borrow(paint, key_press, key_release, mouse_double_click, mouse_press, mouse_release, mouse_move, resize)
 pub extern "c" fn Window::new(
   paint~ : PaintEventHandler,
   key_press~ : KeyEventHandler,
@@ -23,7 +26,8 @@ pub extern "c" fn Window::new(
   mouse_press~ : MouseEventHandler,
   mouse_release~ : MouseEventHandler,
   mouse_double_click~ : MouseEventHandler,
-  mouse_move~ : MouseEventHandler
+  mouse_move~ : MouseEventHandler,
+  resize~ : ResizeEventHandler
 ) -> Window = "illusory0x0_Window_new"
 
 ///|

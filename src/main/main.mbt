@@ -30,10 +30,18 @@ fn main {
     mouse_press~,
     mouse_release~,
     mouse_move~,
+    resize~,
   )
   window.show()
   let exit_code = QApplication::exec()
   drop([window, app, exit_code])
+}
+
+///|
+fn resize(win : Window, w : Int, h : Int) -> Unit {
+  println("resize")
+  println("old: \{(w,h)}")
+  println("new: \{(win.width(),win.height())}")
 }
 
 ///|
@@ -48,8 +56,6 @@ fn paint(win : Window, painter : QPainter) -> Unit {
   painter.drawRoundedRect(20, 20, 100, 100, 20, 20)
   painter.drawText(200, 150, text)
   let m = QFontMetricsF::new(font)
-  println(m.height())
-  println(m.horizontalAdvance(QString::from_builtin("hello")))
   println("paint")
 }
 

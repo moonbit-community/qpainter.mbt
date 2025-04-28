@@ -21,6 +21,7 @@ using PaintHandler = Closure<Unit, Ref<Window>, Extern<QPainter>>;
 using KeyEventHandler = Closure<Unit, Ref<Window>, Int, KeyModifier>;
 using MouseEventHandler =
     Closure<Unit, Ref<Window>, Double, Double, KeyModifier, MouseButton>;
+using ResizeEventHandler = Closure<Unit, Ref<Window>, Int, Int>;
 
 struct Window : QWidget {
   Rc<PaintHandler> paint;
@@ -30,11 +31,12 @@ struct Window : QWidget {
   Rc<MouseEventHandler> mouse_press;
   Rc<MouseEventHandler> mouse_release;
   Rc<MouseEventHandler> mouse_move;
+  Rc<ResizeEventHandler> resize;
   Window(PaintHandler p, KeyEventHandler kp, KeyEventHandler kr,
          MouseEventHandler mp, MouseEventHandler mr, MouseEventHandler mdc,
-         MouseEventHandler mm)
+         MouseEventHandler mm, ResizeEventHandler rs)
       : QWidget(), paint(p), key_press(kp), key_release(kr), mouse_press(mp),
-        mouse_release(mr), mouse_double_click(mdc), mouse_move(mm) {
+        mouse_release(mr), mouse_double_click(mdc), mouse_move(mm), resize(rs) {
     this->setMouseTracking(true);
   }
   virtual void paintEvent(QPaintEvent *event) noexcept override {
@@ -62,6 +64,11 @@ struct Window : QWidget {
   }
   virtual void mouseMoveEvent(QMouseEvent *event) noexcept override {
     call_mouse_event(this->mouse_move.repr, event);
+  }
+  virtual void resizeEvent(QResizeEvent *event) noexcept override {
+    let width = Int::from(event->oldSize().width());
+    let height = Int::from(event->oldSize().height());
+    (this->resize.repr)(Ref<Window>::from_this(this), width, height);
   }
   void call_mouse_event(MouseEventHandler event_handler,
                         QMouseEvent *event) noexcept {
@@ -116,8 +123,9 @@ Ref<QApplication> illusory0x0_QApplication_new(Ref<Int> argc,
 Ref<Window> illusory0x0_Window_new(PaintHandler p, KeyEventHandler kp,
                                    KeyEventHandler kr, MouseEventHandler mp,
                                    MouseEventHandler mr, MouseEventHandler mdc,
-                                   MouseEventHandler mm) {
-  return Ref<Window>::from(p, kp, kr, mp, mr, mdc, mm);
+                                   MouseEventHandler mm,
+                                   ResizeEventHandler rs) {
+  return Ref<Window>::from(p, kp, kr, mp, mr, mdc, mm, rs);
 }
 
 Ref<QPainter> illusory0x0_QPainter_new(QPaintDevice *device) {
