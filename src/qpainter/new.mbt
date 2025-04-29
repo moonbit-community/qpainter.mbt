@@ -16,7 +16,8 @@ pub typealias MouseEventHandler = (
 ///|
 pub typealias ResizeEventHandler = (Window, Int, Int) -> Unit
 
-///|
+///| This constructor is very unstable.
+/// We will redesign it in the future.
 /// 640 * 480 excluded title bar.
 #borrow(paint, key_press, key_release, mouse_double_click, mouse_press, mouse_release, mouse_move, resize)
 pub extern "c" fn Window::new(
