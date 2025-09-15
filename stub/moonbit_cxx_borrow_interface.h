@@ -20,6 +20,8 @@
 #endif
 
 #include <concepts>
+#include <type_traits>
+#include <compare>
 
 extern "C" {
 #include <moonbit.h> // moonbit.h now doesn't support C++ FFI
