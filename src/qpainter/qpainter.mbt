@@ -5,7 +5,7 @@ pub extern "c" fn QPainter::drawRect(
   x : Double,
   y : Double,
   w : Double,
-  h : Double
+  h : Double,
 ) -> Unit = "illusory0x0_QPainter_drawRect"
 
 ///|
@@ -14,7 +14,7 @@ pub extern "c" fn QPainter::drawText(
   self : QPainter,
   x : Double,
   y : Double,
-  text : QString
+  text : QString,
 ) -> Unit = "illusory0x0_QPainter_drawText"
 
 ///|
@@ -38,5 +38,5 @@ pub extern "c" fn QPainter::drawRoundedRect(
   w : Double,
   h : Double,
   xRadius : Double,
-  yRadius : Double
+  yRadius : Double,
 ) -> Unit = "illusory0x0_QPainter_drawRoundedRect"

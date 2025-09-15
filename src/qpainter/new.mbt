@@ -1,22 +1,17 @@
 ///|
-pub typealias PaintEventHandler = (Window, QPainter) -> Unit
+pub typealias (Window, QPainter) -> Unit as PaintEventHandler
 
 ///|
-pub typealias KeyEventHandler = (Window, Int, KeyModifier) -> Unit
+pub typealias (Window, Int, KeyModifier) -> Unit as KeyEventHandler
 
 ///|
-pub typealias MouseEventHandler = (
-  Window,
-  Double,
-  Double,
-  KeyModifier,
-  MouseButton,
-) -> Unit
+pub typealias (Window, Double, Double, KeyModifier, MouseButton) -> Unit as MouseEventHandler
 
 ///|
-pub typealias ResizeEventHandler = (Window, Int, Int) -> Unit
+pub typealias (Window, Int, Int) -> Unit as ResizeEventHandler
 
-///| This constructor is very unstable.
+///|
+/// This constructor is very unstable.
 /// We will redesign it in the future.
 /// 640 * 480 excluded title bar.
 #borrow(paint, key_press, key_release, mouse_double_click, mouse_press, mouse_release, mouse_move, resize)
@@ -28,7 +23,7 @@ pub extern "c" fn Window::new(
   mouse_release~ : MouseEventHandler,
   mouse_double_click~ : MouseEventHandler,
   mouse_move~ : MouseEventHandler,
-  resize~ : ResizeEventHandler
+  resize~ : ResizeEventHandler,
 ) -> Window = "illusory0x0_Window_new"
 
 ///|
@@ -47,7 +42,8 @@ pub extern "c" fn QPen::new(brush : QBrush, width : Double) -> QPen = "illusory0
 #borrow(color)
 pub extern "c" fn QBrush::new(color : QColor) -> QBrush = "illusory0x0_QBrush_new"
 
-///| shadow copy
+///|
+/// shadow copy
 #borrow(xs)
 pub extern "c" fn QStringList::new(xs : FixedArray[QString]) -> QStringList = "illusory0x0_QStringList_new"
 
@@ -65,7 +61,7 @@ pub extern "c" fn QRectF::new(
   x : Double,
   y : Double,
   width : Double,
-  height : Double
+  height : Double,
 ) -> QRectF = "illusory0x0_QRectF_new"
 
 ///|
@@ -74,7 +70,7 @@ pub extern "c" fn QFont::new(
   families : QStringList,
   size : Int,
   weight : Int,
-  italic : Bool
+  italic : Bool,
 ) -> QFont = "illusory0x0_QFont_new"
 
 ///|

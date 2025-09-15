@@ -2,7 +2,7 @@
 #borrow(argc, argv)
 pub extern "c" fn QApplication::new(
   argc : Ref[Int],
-  argv : FixedArray[Bytes]
+  argv : FixedArray[Bytes],
 ) -> QApplication = "illusory0x0_QApplication_new"
 
 ///|

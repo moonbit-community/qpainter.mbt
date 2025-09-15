@@ -76,7 +76,7 @@ fn mouse_double_click(
   x : Double,
   y : Double,
   modifier : KeyModifier,
-  button : MouseButton
+  button : MouseButton,
 ) -> Unit {
   println("double click")
 }
@@ -87,7 +87,7 @@ fn mouse_press(
   x : Double,
   y : Double,
   modifier : KeyModifier,
-  button : MouseButton
+  button : MouseButton,
 ) -> Unit {
   println("mouse press")
   println("click: \{(x,y,modifier,button)}")
@@ -99,7 +99,7 @@ fn mouse_release(
   x : Double,
   y : Double,
   modifier : KeyModifier,
-  button : MouseButton
+  button : MouseButton,
 ) -> Unit {
   println("mouse_release")
 }
@@ -110,7 +110,7 @@ fn mouse_move(
   x : Double,
   y : Double,
   modifier : KeyModifier,
-  button : MouseButton
+  button : MouseButton,
 ) -> Unit {
   // println("move: \{(x,y,modifier)}")
 }

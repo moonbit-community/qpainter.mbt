@@ -5,7 +5,8 @@ pub type QApplication
 pub type Window
 
 ///|
-pub extern type QPainter
+#external
+pub type QPainter
 
 ///|
 pub type QColor
