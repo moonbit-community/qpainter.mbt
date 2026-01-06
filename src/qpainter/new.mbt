@@ -1,14 +1,14 @@
 ///|
-pub typealias (Window, QPainter) -> Unit as PaintEventHandler
+pub type PaintEventHandler = (Window, QPainter) -> Unit
 
 ///|
-pub typealias (Window, Int, KeyModifier) -> Unit as KeyEventHandler
+pub type KeyEventHandler = (Window, Int, KeyModifier) -> Unit
 
 ///|
-pub typealias (Window, Double, Double, KeyModifier, MouseButton) -> Unit as MouseEventHandler
+pub type MouseEventHandler = (Window, Double, Double, KeyModifier, MouseButton) -> Unit
 
 ///|
-pub typealias (Window, Int, Int) -> Unit as ResizeEventHandler
+pub type ResizeEventHandler = (Window, Int, Int) -> Unit
 
 ///|
 /// This constructor is very unstable.
