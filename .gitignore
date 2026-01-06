@@ -13,4 +13,5 @@ temp.sh
 test.sh
 .moonagent
 _build/
+_build
 target
