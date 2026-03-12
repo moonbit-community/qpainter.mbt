@@ -1,8 +1,8 @@
 {
-  "name": "illusory0x0/qpainter",
+  "name": "moonbit-community/qpainter",
   "version": "0.3.1",
   "readme": "README.md",
-  "repository": "https://github.com/moonbit-community/qpainter.mbt",
+  "repository": "https://github.com/moonbit-community/qpainter",
   "license": "Apache-2.0",
   "keywords": [
     "Qt6",

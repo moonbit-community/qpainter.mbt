@@ -1,5 +1,5 @@
 // Generated using `moon info`, DON'T EDIT IT
-package "illusory0x0/qpainter/qpainter"
+package "moonbit-community/qpainter/qpainter"
 
 // Values
 
@@ -10,4 +10,3 @@ package "illusory0x0/qpainter/qpainter"
 // Type aliases
 
 // Traits
-

@@ -1,6 +1,6 @@
 {
   "is-main": true,
-  "import": ["illusory0x0/qpainter/qpainter"],
+  "import": ["moonbit-community/qpainter/qpainter"],
   "link": {
     "native": {
       "cc": "gcc",

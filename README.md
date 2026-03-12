@@ -1,4 +1,4 @@
-# qpainter.mbt (WIP)
+# qpainter (WIP)
 
 a QPainter FFI binding.
 
