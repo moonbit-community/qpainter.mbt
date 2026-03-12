@@ -1,21 +1,21 @@
 ///|
-typealias @qpainter.(
-  QPainter,
-  QFont,
-  QBrush,
-  QPen,
-  QColor,
-  QApplication,
-  Window,
-  KeyModifier,
-  MouseButton,
-  QStringList,
-  QString,
-  QFontMetricsF
-)
+using @qpainter {
+  type QPainter,
+  type QFont,
+  type QBrush,
+  type QPen,
+  type QColor,
+  type QApplication,
+  type Window,
+  type KeyModifier,
+  type MouseButton,
+  type QStringList,
+  type QString,
+  type QFontMetricsF,
+}
 
 ///|
-fnalias @qpainter.(drop, key_to_string)
+using @qpainter {drop, key_to_string}
 
 ///|
 fn main {
