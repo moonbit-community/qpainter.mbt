@@ -15,7 +15,7 @@ using @qpainter {
 }
 
 ///|
-using @qpainter {drop, key_to_string}
+using @qpainter {key_to_string}
 
 ///|
 fn main {
@@ -33,8 +33,7 @@ fn main {
     resize~,
   )
   window.show()
-  let exit_code = QApplication::exec()
-  drop([window, app, exit_code])
+  ignore(QApplication::exec())
 }
 
 ///|
