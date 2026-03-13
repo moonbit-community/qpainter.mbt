@@ -34,7 +34,8 @@ fn main {
   )
   window.show()
   let exit_code = QApplication::exec()
-  drop([window, app, exit_code])
+  drop([window, app])
+  ignore(exit_code)
 }
 
 ///|

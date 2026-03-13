@@ -42,6 +42,12 @@ pub type QFontMetricsF
 pub(open) trait Drop {}
 
 ///|
+pub impl Drop for QApplication
+
+///|
+pub impl Drop for Window
+
+///|
 pub fn drop(xs : FixedArray[&Drop]) -> Unit {
 
 }
