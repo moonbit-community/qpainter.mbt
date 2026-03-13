@@ -1,0 +1,41 @@
+name: publish-package
+
+on:
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup MoonBit
+        uses: moonbit-community/setup-moonbit@main
+        with:
+          version: stable
+
+      - name: Install native dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang cmake ninja-build qt6-base-dev pkg-config
+
+      - name: Configure Qt include path
+        run: |
+          echo "QT6_INCLUDE=$(pkg-config --variable=includedir Qt6Core)" >> "$GITHUB_ENV"
+
+      - name: moon version
+        run: moon version --all
+
+      - name: moon check (native)
+        run: |
+          moon update
+          moon install
+          moon check --target native --deny-warn
+
+      - name: publish
+        env:
+          SECRET: ${{ secrets.MOONCAKES_MOONBITLANG_TOKEN }}
+        run: |
+          echo "$SECRET" > ~/.moon/credentials.json
+          moon publish
+          rm ~/.moon/credentials.json
