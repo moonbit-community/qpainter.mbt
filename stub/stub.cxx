@@ -179,9 +179,8 @@ Ref<QPointF> illusory0x0_QPointF_new(Double x, Double y) {
 // conversion
 moonbit_string_t illusory0x0_QString_to_moonbit_string(Ref<QString> self) {
   auto len = self->size();
-  uint16_t *dest =
-      (uint16_t *)moonbit_malloc_array(moonbit_BLOCK_KIND_VAL_ARRAY, 1, len);
-  memcpy(dest, self->data(), len);
+  moonbit_string_t dest = moonbit_make_string_raw(len);
+  memcpy(dest, self->utf16(), len * sizeof(uint16_t));
   return dest;
 }
 
@@ -256,6 +255,10 @@ double illusory0x0_QSizeF_height(Ref<QSizeF> self) { return self->height(); }
 
 double illusory0x0_QPointF_x(Ref<QPointF> self) { return self->x(); }
 double illusory0x0_QPointF_y(Ref<QPointF> self) { return self->y(); }
+int32_t illusory0x0_Window_devicePixelRatio(Ref<Window> self) {
+  return self->devicePixelRatio();
+}
+
 double illusory0x0_Window_devicePixelRatioF(Ref<Window> self) {
   return self->devicePixelRatioF();
 }

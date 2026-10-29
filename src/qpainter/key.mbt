@@ -215,7 +215,7 @@ pub const Key_Direction_R = 0x01000060
 pub const Key_Space = 0x20
 
 ///|
-pub const Key_Any : Int = Key_Space
+pub const Key_Any : Int32 = Key_Space
 
 ///|
 pub const Key_Exclam = 0x21

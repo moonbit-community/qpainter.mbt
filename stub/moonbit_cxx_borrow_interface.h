@@ -25,8 +25,6 @@
 
 extern "C" {
 #include <moonbit.h> // moonbit.h now doesn't support C++ FFI
-MOONBIT_EXPORT void *moonbit_malloc_array(enum moonbit_block_kind kind,
-                                          int elem_size_shift, int32_t len);
 }
 
 #undef DeriveNewtypeFrom

@@ -1,0 +1,30 @@
+name = "moonbit-community/qpainter"
+
+version = "0.3.1"
+
+readme = "README.md"
+
+repository = "https://github.com/moonbit-community/qpainter.mbt"
+
+license = "Apache-2.0"
+
+keywords = [
+  "Qt6",
+  "Qt",
+  "GUI",
+  "QPainter",
+  "canvas",
+  "native",
+  "FFI",
+  "C++ FFI",
+]
+
+description = "Moonbit FFI Bindings for Qt's QPainter"
+
+source = "src"
+
+preferred_target = "native"
+
+options(
+  "--moonbit-unstable-prebuild": "build.py",
+)

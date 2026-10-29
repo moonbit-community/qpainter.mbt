@@ -2,13 +2,13 @@
 pub type PaintEventHandler = (Window, QPainter) -> Unit
 
 ///|
-pub type KeyEventHandler = (Window, Int, KeyModifier) -> Unit
+pub type KeyEventHandler = (Window, Int32, KeyModifier) -> Unit
 
 ///|
 pub type MouseEventHandler = (Window, Double, Double, KeyModifier, MouseButton) -> Unit
 
 ///|
-pub type ResizeEventHandler = (Window, Int, Int) -> Unit
+pub type ResizeEventHandler = (Window, Int32, Int32) -> Unit
 
 ///|
 /// This constructor is very unstable.
@@ -28,7 +28,12 @@ pub extern "c" fn Window::new(
 
 ///|
 #borrow(r, g, b, a)
-pub extern "c" fn QColor::new(r : Int, g : Int, b : Int, a : Int) -> QColor = "illusory0x0_QColor_new"
+pub extern "c" fn QColor::new(
+  r : Int32,
+  g : Int32,
+  b : Int32,
+  a : Int32,
+) -> QColor = "illusory0x0_QColor_new"
 
 ///|
 #borrow(str)
@@ -68,8 +73,8 @@ pub extern "c" fn QRectF::new(
 #borrow(families, size, weight, italic)
 pub extern "c" fn QFont::new(
   families : QStringList,
-  size : Int,
-  weight : Int,
+  size : Int32,
+  weight : Int32,
   italic : Bool,
 ) -> QFont = "illusory0x0_QFont_new"
 

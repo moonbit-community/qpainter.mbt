@@ -15,11 +15,11 @@ using @qpainter {
 }
 
 ///|
-using @qpainter {drop, key_to_string}
+using @qpainter {key_to_string}
 
 ///|
 fn main {
-  let argc : Ref[Int] = Ref::new(1)
+  let argc : Ref[Int32] = Ref(1)
   let argv : FixedArray[Bytes] = [b"painter\x00"]
   let app = QApplication::new(argc, argv)
   let window = Window::new(
@@ -34,14 +34,14 @@ fn main {
   )
   window.show()
   let exit_code = QApplication::exec()
-  drop([window, app, exit_code])
+  ignore((window, app, exit_code))
 }
 
 ///|
-fn resize(win : Window, w : Int, h : Int) -> Unit {
+fn resize(win : Window, w : Int32, h : Int32) -> Unit {
   println("resize")
-  println("old: \{(w,h)}")
-  println("new: \{(win.width(),win.height())}")
+  println("old: \{w}, \{h}")
+  println("new: \{win.width()}, \{win.height()}")
 }
 
 ///|
@@ -60,13 +60,13 @@ fn paint(win : Window, painter : QPainter) -> Unit {
 }
 
 ///|
-fn key_press(win : Window, key : Int, modifier : KeyModifier) -> Unit {
+fn key_press(win : Window, key : Int32, modifier : KeyModifier) -> Unit {
   println("key press")
-  println("key: \{(key_to_string(key),modifier)}")
+  println("key: \{key_to_string(key)}, \{modifier}")
 }
 
 ///|
-fn key_release(win : Window, key : Int, modifier : KeyModifier) -> Unit {
+fn key_release(win : Window, key : Int32, modifier : KeyModifier) -> Unit {
   println("key release")
 }
 
@@ -90,7 +90,7 @@ fn mouse_press(
   button : MouseButton,
 ) -> Unit {
   println("mouse press")
-  println("click: \{(x,y,modifier,button)}")
+  println("click: \{x}, \{y}, \{modifier}, \{button}")
 }
 
 ///|
