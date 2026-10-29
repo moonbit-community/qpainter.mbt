@@ -3,6 +3,7 @@
 import hashlib
 import json
 import os
+import platform
 from pathlib import Path
 import shlex
 import shutil
@@ -28,4 +29,13 @@ if not linked_archive.exists():
 qt_libs = subprocess.check_output(["pkg-config", "--libs", "Qt6Widgets"], text=True).strip()
 cxx_lib = "-lc++" if sys.platform == "darwin" else "-lstdc++"
 link_flags = shlex.quote(str(linked_archive)) + " " + qt_libs + " " + cxx_lib + " " + flags
+if flags and sys.platform.startswith("linux"):
+    # Moon links generated C with the C driver, which omits Clang's C++ UBSan
+    # support library. Include it explicitly for virtual-pointer checks in Qt.
+    runtime_name = "libclang_rt.ubsan_standalone_cxx-" + platform.machine() + ".a"
+    runtime = subprocess.check_output([cxx, "-print-file-name=" + runtime_name], text=True).strip()
+    if not Path(runtime).is_file():
+        raise RuntimeError("Install the Clang C++ sanitizer runtime: " + runtime_name)
+    link_flags += " " + shlex.quote(runtime)
+
 json.dump({"link_configs": [{"package": "moonbit-community/qpainter/qpainter", "link_flags": link_flags}]}, sys.stdout)
