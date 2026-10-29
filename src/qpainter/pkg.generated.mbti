@@ -1,12 +1,1046 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "moonbit-community/qpainter/qpainter"
 
+import {
+  "moonbitlang/core/debug",
+  "moonbitlang/core/ref",
+}
+
 // Values
+pub const Key_0 : Int32 = 0x30
+
+pub const Key_1 : Int32 = 0x31
+
+pub const Key_2 : Int32 = 0x32
+
+pub const Key_3 : Int32 = 0x33
+
+pub const Key_4 : Int32 = 0x34
+
+pub const Key_5 : Int32 = 0x35
+
+pub const Key_6 : Int32 = 0x36
+
+pub const Key_7 : Int32 = 0x37
+
+pub const Key_8 : Int32 = 0x38
+
+pub const Key_9 : Int32 = 0x39
+
+pub const Key_A : Int32 = 0x41
+
+pub const Key_AE : Int32 = 0x0c6
+
+pub const Key_Aacute : Int32 = 0x0c1
+
+pub const Key_Acircumflex : Int32 = 0x0c2
+
+pub const Key_AddFavorite : Int32 = 0x010000c0
+
+pub const Key_Adiaeresis : Int32 = 0x0c4
+
+pub const Key_Agrave : Int32 = 0x0c0
+
+pub const Key_Alt : Int32 = 0x01000023
+
+pub const Key_AltGr : Int32 = 0x01001103
+
+pub const Key_Ampersand : Int32 = 0x26
+
+pub const Key_Any : Int32 = 0x20
+
+pub const Key_Apostrophe : Int32 = 0x27
+
+pub const Key_ApplicationLeft : Int32 = 0x010000c7
+
+pub const Key_ApplicationRight : Int32 = 0x010000c8
+
+pub const Key_Aring : Int32 = 0x0c5
+
+pub const Key_AsciiCircum : Int32 = 0x5e
+
+pub const Key_AsciiTilde : Int32 = 0x7e
+
+pub const Key_Asterisk : Int32 = 0x2a
+
+pub const Key_At : Int32 = 0x40
+
+pub const Key_Atilde : Int32 = 0x0c3
+
+pub const Key_AudioCycleTrack : Int32 = 0x01000106
+
+pub const Key_AudioForward : Int32 = 0x01000102
+
+pub const Key_AudioRandomPlay : Int32 = 0x01000104
+
+pub const Key_AudioRepeat : Int32 = 0x01000103
+
+pub const Key_AudioRewind : Int32 = 0x010000c5
+
+pub const Key_Away : Int32 = 0x010000f8
+
+pub const Key_B : Int32 = 0x42
+
+pub const Key_Back : Int32 = 0x01000061
+
+pub const Key_BackForward : Int32 = 0x010000c6
+
+pub const Key_Backslash : Int32 = 0x5c
+
+pub const Key_Backspace : Int32 = 0x01000003
+
+pub const Key_Backtab : Int32 = 0x01000002
+
+pub const Key_Bar : Int32 = 0x7c
+
+pub const Key_BassBoost : Int32 = 0x01000073
+
+pub const Key_BassDown : Int32 = 0x01000075
+
+pub const Key_BassUp : Int32 = 0x01000074
+
+pub const Key_Battery : Int32 = 0x010000fe
+
+pub const Key_Blue : Int32 = 0x01000117
+
+pub const Key_Bluetooth : Int32 = 0x010000ff
+
+pub const Key_Book : Int32 = 0x010000c9
+
+pub const Key_BraceLeft : Int32 = 0x7b
+
+pub const Key_BraceRight : Int32 = 0x7d
+
+pub const Key_BracketLeft : Int32 = 0x5b
+
+pub const Key_BracketRight : Int32 = 0x5d
+
+pub const Key_BrightnessAdjust : Int32 = 0x010000c2
+
+pub const Key_C : Int32 = 0x43
+
+pub const Key_CD : Int32 = 0x010000ca
+
+pub const Key_Calculator : Int32 = 0x010000cb
+
+pub const Key_Calendar : Int32 = 0x010000e4
+
+pub const Key_Call : Int32 = 0x01100004
+
+pub const Key_Camera : Int32 = 0x01100020
+
+pub const Key_CameraFocus : Int32 = 0x01100021
+
+pub const Key_Cancel : Int32 = 0x01020001
+
+pub const Key_CapsLock : Int32 = 0x01000024
+
+pub const Key_Ccedilla : Int32 = 0x0c7
+
+pub const Key_ChannelDown : Int32 = 0x01000119
+
+pub const Key_ChannelUp : Int32 = 0x01000118
+
+pub const Key_Clear : Int32 = 0x0100000b
+
+pub const Key_ClearGrab : Int32 = 0x010000cd
+
+pub const Key_Close : Int32 = 0x010000ce
+
+pub const Key_Codeinput : Int32 = 0x01001137
+
+pub const Key_Colon : Int32 = 0x3a
+
+pub const Key_Comma : Int32 = 0x2c
+
+pub const Key_Community : Int32 = 0x010000c4
+
+pub const Key_Context1 : Int32 = 0x01100000
+
+pub const Key_Context2 : Int32 = 0x01100001
+
+pub const Key_Context3 : Int32 = 0x01100002
+
+pub const Key_Context4 : Int32 = 0x01100003
+
+pub const Key_ContrastAdjust : Int32 = 0x0100010d
+
+pub const Key_Control : Int32 = 0x01000021
+
+pub const Key_Copy : Int32 = 0x010000cf
+
+pub const Key_Cut : Int32 = 0x010000d0
+
+pub const Key_D : Int32 = 0x44
+
+pub const Key_DOS : Int32 = 0x010000d2
+
+pub const Key_Dead_A : Int32 = 0x01001281
+
+pub const Key_Dead_Abovecomma : Int32 = 0x01001264
+
+pub const Key_Dead_Abovedot : Int32 = 0x01001256
+
+pub const Key_Dead_Abovereversedcomma : Int32 = 0x01001265
+
+pub const Key_Dead_Abovering : Int32 = 0x01001258
+
+pub const Key_Dead_Aboveverticalline : Int32 = 0x01001291
+
+pub const Key_Dead_Acute : Int32 = 0x01001251
+
+pub const Key_Dead_Belowbreve : Int32 = 0x0100126b
+
+pub const Key_Dead_Belowcircumflex : Int32 = 0x01001269
+
+pub const Key_Dead_Belowcomma : Int32 = 0x0100126e
+
+pub const Key_Dead_Belowdiaeresis : Int32 = 0x0100126c
+
+pub const Key_Dead_Belowdot : Int32 = 0x01001260
+
+pub const Key_Dead_Belowmacron : Int32 = 0x01001268
+
+pub const Key_Dead_Belowring : Int32 = 0x01001267
+
+pub const Key_Dead_Belowtilde : Int32 = 0x0100126a
+
+pub const Key_Dead_Belowverticalline : Int32 = 0x01001292
+
+pub const Key_Dead_Breve : Int32 = 0x01001255
+
+pub const Key_Dead_Capital_Schwa : Int32 = 0x0100128b
+
+pub const Key_Dead_Caron : Int32 = 0x0100125a
+
+pub const Key_Dead_Cedilla : Int32 = 0x0100125b
+
+pub const Key_Dead_Circumflex : Int32 = 0x01001252
+
+pub const Key_Dead_Currency : Int32 = 0x0100126f
+
+pub const Key_Dead_Diaeresis : Int32 = 0x01001257
+
+pub const Key_Dead_Doubleacute : Int32 = 0x01001259
+
+pub const Key_Dead_Doublegrave : Int32 = 0x01001266
+
+pub const Key_Dead_E : Int32 = 0x01001283
+
+pub const Key_Dead_Grave : Int32 = 0x01001250
+
+pub const Key_Dead_Greek : Int32 = 0x0100128c
+
+pub const Key_Dead_Hook : Int32 = 0x01001261
+
+pub const Key_Dead_Horn : Int32 = 0x01001262
+
+pub const Key_Dead_I : Int32 = 0x01001285
+
+pub const Key_Dead_Invertedbreve : Int32 = 0x0100126d
+
+pub const Key_Dead_Iota : Int32 = 0x0100125d
+
+pub const Key_Dead_Longsolidusoverlay : Int32 = 0x01001293
+
+pub const Key_Dead_Lowline : Int32 = 0x01001290
+
+pub const Key_Dead_Macron : Int32 = 0x01001254
+
+pub const Key_Dead_O : Int32 = 0x01001287
+
+pub const Key_Dead_Ogonek : Int32 = 0x0100125c
+
+pub const Key_Dead_Semivoiced_Sound : Int32 = 0x0100125f
+
+pub const Key_Dead_Small_Schwa : Int32 = 0x0100128a
+
+pub const Key_Dead_Stroke : Int32 = 0x01001263
+
+pub const Key_Dead_Tilde : Int32 = 0x01001253
+
+pub const Key_Dead_U : Int32 = 0x01001289
+
+pub const Key_Dead_Voiced_Sound : Int32 = 0x0100125e
+
+pub const Key_Dead_a : Int32 = 0x01001280
+
+pub const Key_Dead_e : Int32 = 0x01001282
+
+pub const Key_Dead_i : Int32 = 0x01001284
+
+pub const Key_Dead_o : Int32 = 0x01001286
+
+pub const Key_Dead_u : Int32 = 0x01001288
+
+pub const Key_Delete : Int32 = 0x01000007
+
+pub const Key_Direction_L : Int32 = 0x01000059
+
+pub const Key_Direction_R : Int32 = 0x01000060
+
+pub const Key_Display : Int32 = 0x010000d1
+
+pub const Key_Documents : Int32 = 0x010000d3
+
+pub const Key_Dollar : Int32 = 0x24
+
+pub const Key_Down : Int32 = 0x01000015
+
+pub const Key_E : Int32 = 0x45
+
+pub const Key_ETH : Int32 = 0x0d0
+
+pub const Key_Eacute : Int32 = 0x0c9
+
+pub const Key_Ecircumflex : Int32 = 0x0ca
+
+pub const Key_Ediaeresis : Int32 = 0x0cb
+
+pub const Key_Egrave : Int32 = 0x0c8
+
+pub const Key_Eisu_Shift : Int32 = 0x0100112f
+
+pub const Key_Eisu_toggle : Int32 = 0x01001130
+
+pub const Key_Eject : Int32 = 0x010000b9
+
+pub const Key_End : Int32 = 0x01000011
+
+pub const Key_Enter : Int32 = 0x01000005
+
+pub const Key_Equal : Int32 = 0x3d
+
+pub const Key_Escape : Int32 = 0x01000000
+
+pub const Key_Excel : Int32 = 0x010000d4
+
+pub const Key_Exclam : Int32 = 0x21
+
+pub const Key_Execute : Int32 = 0x01020003
+
+pub const Key_Exit : Int32 = 0x0102000a
+
+pub const Key_Explorer : Int32 = 0x010000d5
+
+pub const Key_F : Int32 = 0x46
+
+pub const Key_F1 : Int32 = 0x01000030
+
+pub const Key_F10 : Int32 = 0x01000039
+
+pub const Key_F11 : Int32 = 0x0100003a
+
+pub const Key_F12 : Int32 = 0x0100003b
+
+pub const Key_F13 : Int32 = 0x0100003c
+
+pub const Key_F14 : Int32 = 0x0100003d
+
+pub const Key_F15 : Int32 = 0x0100003e
+
+pub const Key_F16 : Int32 = 0x0100003f
+
+pub const Key_F17 : Int32 = 0x01000040
+
+pub const Key_F18 : Int32 = 0x01000041
+
+pub const Key_F19 : Int32 = 0x01000042
+
+pub const Key_F2 : Int32 = 0x01000031
+
+pub const Key_F20 : Int32 = 0x01000043
+
+pub const Key_F21 : Int32 = 0x01000044
+
+pub const Key_F22 : Int32 = 0x01000045
+
+pub const Key_F23 : Int32 = 0x01000046
+
+pub const Key_F24 : Int32 = 0x01000047
+
+pub const Key_F25 : Int32 = 0x01000048
+
+pub const Key_F26 : Int32 = 0x01000049
+
+pub const Key_F27 : Int32 = 0x0100004a
+
+pub const Key_F28 : Int32 = 0x0100004b
+
+pub const Key_F29 : Int32 = 0x0100004c
+
+pub const Key_F3 : Int32 = 0x01000032
+
+pub const Key_F30 : Int32 = 0x0100004d
+
+pub const Key_F31 : Int32 = 0x0100004e
+
+pub const Key_F32 : Int32 = 0x0100004f
+
+pub const Key_F33 : Int32 = 0x01000050
+
+pub const Key_F34 : Int32 = 0x01000051
+
+pub const Key_F35 : Int32 = 0x01000052
+
+pub const Key_F4 : Int32 = 0x01000033
+
+pub const Key_F5 : Int32 = 0x01000034
+
+pub const Key_F6 : Int32 = 0x01000035
+
+pub const Key_F7 : Int32 = 0x01000036
+
+pub const Key_F8 : Int32 = 0x01000037
+
+pub const Key_F9 : Int32 = 0x01000038
+
+pub const Key_Favorites : Int32 = 0x01000091
+
+pub const Key_Finance : Int32 = 0x010000c3
+
+pub const Key_Find : Int32 = 0x01000122
+
+pub const Key_Flip : Int32 = 0x01100006
+
+pub const Key_Forward : Int32 = 0x01000062
+
+pub const Key_G : Int32 = 0x47
+
+pub const Key_Game : Int32 = 0x010000d6
+
+pub const Key_Go : Int32 = 0x010000d7
+
+pub const Key_Greater : Int32 = 0x3e
+
+pub const Key_Green : Int32 = 0x01000115
+
+pub const Key_Guide : Int32 = 0x0100011a
+
+pub const Key_H : Int32 = 0x48
+
+pub const Key_Hangul : Int32 = 0x01001131
+
+pub const Key_Hangul_Banja : Int32 = 0x01001139
+
+pub const Key_Hangul_End : Int32 = 0x01001133
+
+pub const Key_Hangul_Hanja : Int32 = 0x01001134
+
+pub const Key_Hangul_Jamo : Int32 = 0x01001135
+
+pub const Key_Hangul_Jeonja : Int32 = 0x01001138
+
+pub const Key_Hangul_PostHanja : Int32 = 0x0100113b
+
+pub const Key_Hangul_PreHanja : Int32 = 0x0100113a
+
+pub const Key_Hangul_Romaja : Int32 = 0x01001136
+
+pub const Key_Hangul_Special : Int32 = 0x0100113f
+
+pub const Key_Hangul_Start : Int32 = 0x01001132
+
+pub const Key_Hangup : Int32 = 0x01100005
+
+pub const Key_Hankaku : Int32 = 0x01001129
+
+pub const Key_Help : Int32 = 0x01000058
+
+pub const Key_Henkan : Int32 = 0x01001123
+
+pub const Key_Hibernate : Int32 = 0x01000108
+
+pub const Key_Hiragana : Int32 = 0x01001125
+
+pub const Key_Hiragana_Katakana : Int32 = 0x01001127
+
+pub const Key_History : Int32 = 0x010000bf
+
+pub const Key_Home : Int32 = 0x01000010
+
+pub const Key_HomePage : Int32 = 0x01000090
+
+pub const Key_HotLinks : Int32 = 0x010000c1
+
+pub const Key_Hyper_L : Int32 = 0x01000056
+
+pub const Key_Hyper_R : Int32 = 0x01000057
+
+pub const Key_I : Int32 = 0x49
+
+pub const Key_Iacute : Int32 = 0x0cd
+
+pub const Key_Icircumflex : Int32 = 0x0ce
+
+pub const Key_Idiaeresis : Int32 = 0x0cf
+
+pub const Key_Igrave : Int32 = 0x0cc
+
+pub const Key_Info : Int32 = 0x0100011b
+
+pub const Key_Insert : Int32 = 0x01000006
+
+pub const Key_J : Int32 = 0x4a
+
+pub const Key_K : Int32 = 0x4b
+
+pub const Key_Kana_Lock : Int32 = 0x0100112d
+
+pub const Key_Kana_Shift : Int32 = 0x0100112e
+
+pub const Key_Kanji : Int32 = 0x01001121
+
+pub const Key_Katakana : Int32 = 0x01001126
+
+pub const Key_KeyboardBrightnessDown : Int32 = 0x010000b6
+
+pub const Key_KeyboardBrightnessUp : Int32 = 0x010000b5
+
+pub const Key_KeyboardLightOnOff : Int32 = 0x010000b4
+
+pub const Key_L : Int32 = 0x4c
+
+pub const Key_LastNumberRedial : Int32 = 0x01100009
+
+pub const Key_Launch0 : Int32 = 0x010000a2
+
+pub const Key_Launch1 : Int32 = 0x010000a3
+
+pub const Key_Launch2 : Int32 = 0x010000a4
+
+pub const Key_Launch3 : Int32 = 0x010000a5
+
+pub const Key_Launch4 : Int32 = 0x010000a6
+
+pub const Key_Launch5 : Int32 = 0x010000a7
+
+pub const Key_Launch6 : Int32 = 0x010000a8
+
+pub const Key_Launch7 : Int32 = 0x010000a9
+
+pub const Key_Launch8 : Int32 = 0x010000aa
+
+pub const Key_Launch9 : Int32 = 0x010000ab
+
+pub const Key_LaunchA : Int32 = 0x010000ac
+
+pub const Key_LaunchB : Int32 = 0x010000ad
+
+pub const Key_LaunchC : Int32 = 0x010000ae
+
+pub const Key_LaunchD : Int32 = 0x010000af
+
+pub const Key_LaunchE : Int32 = 0x010000b0
+
+pub const Key_LaunchF : Int32 = 0x010000b1
+
+pub const Key_LaunchG : Int32 = 0x0100010e
+
+pub const Key_LaunchH : Int32 = 0x0100010f
+
+pub const Key_LaunchMail : Int32 = 0x010000a0
+
+pub const Key_LaunchMedia : Int32 = 0x010000a1
+
+pub const Key_Left : Int32 = 0x01000012
+
+pub const Key_Less : Int32 = 0x3c
+
+pub const Key_LightBulb : Int32 = 0x010000bd
+
+pub const Key_LogOff : Int32 = 0x010000d9
+
+pub const Key_M : Int32 = 0x4d
+
+pub const Key_MailForward : Int32 = 0x010000fb
+
+pub const Key_Market : Int32 = 0x010000da
+
+pub const Key_Massyo : Int32 = 0x0100112c
+
+pub const Key_MediaLast : Int32 = 0x0100ffff
+
+pub const Key_MediaNext : Int32 = 0x01000083
+
+pub const Key_MediaPause : Int32 = 0x01000085
+
+pub const Key_MediaPlay : Int32 = 0x01000080
+
+pub const Key_MediaPrevious : Int32 = 0x01000082
+
+pub const Key_MediaRecord : Int32 = 0x01000084
+
+pub const Key_MediaStop : Int32 = 0x01000081
+
+pub const Key_MediaTogglePlayPause : Int32 = 0x01000086
+
+pub const Key_Meeting : Int32 = 0x010000db
+
+pub const Key_Memo : Int32 = 0x010000bc
+
+pub const Key_Menu : Int32 = 0x01000055
+
+pub const Key_MenuKB : Int32 = 0x010000dc
+
+pub const Key_MenuPB : Int32 = 0x010000dd
+
+pub const Key_Messenger : Int32 = 0x010000f9
+
+pub const Key_Meta : Int32 = 0x01000022
+
+pub const Key_MicMute : Int32 = 0x01000113
+
+pub const Key_MicVolumeDown : Int32 = 0x0100011e
+
+pub const Key_MicVolumeUp : Int32 = 0x0100011d
+
+pub const Key_Minus : Int32 = 0x2d
+
+pub const Key_Mode_switch : Int32 = 0x0100117e
+
+pub const Key_MonBrightnessDown : Int32 = 0x010000b3
+
+pub const Key_MonBrightnessUp : Int32 = 0x010000b2
+
+pub const Key_Muhenkan : Int32 = 0x01001122
+
+pub const Key_Multi_key : Int32 = 0x01001120
+
+pub const Key_MultipleCandidate : Int32 = 0x0100113d
+
+pub const Key_Music : Int32 = 0x010000fd
+
+pub const Key_MySites : Int32 = 0x010000de
+
+pub const Key_N : Int32 = 0x4e
+
+pub const Key_New : Int32 = 0x01000120
+
+pub const Key_News : Int32 = 0x010000df
+
+pub const Key_No : Int32 = 0x01010002
+
+pub const Key_Ntilde : Int32 = 0x0d1
+
+pub const Key_NumLock : Int32 = 0x01000025
+
+pub const Key_NumberSign : Int32 = 0x23
+
+pub const Key_O : Int32 = 0x4f
+
+pub const Key_Oacute : Int32 = 0x0d3
+
+pub const Key_Ocircumflex : Int32 = 0x0d4
+
+pub const Key_Odiaeresis : Int32 = 0x0d6
+
+pub const Key_OfficeHome : Int32 = 0x010000e0
+
+pub const Key_Ograve : Int32 = 0x0d2
+
+pub const Key_Ooblique : Int32 = 0x0d8
+
+pub const Key_Open : Int32 = 0x01000121
+
+pub const Key_OpenUrl : Int32 = 0x01000094
+
+pub const Key_Option : Int32 = 0x010000e1
+
+pub const Key_Otilde : Int32 = 0x0d5
+
+pub const Key_P : Int32 = 0x50
+
+pub const Key_PageDown : Int32 = 0x01000017
+
+pub const Key_PageUp : Int32 = 0x01000016
+
+pub const Key_ParenLeft : Int32 = 0x28
+
+pub const Key_ParenRight : Int32 = 0x29
+
+pub const Key_Paste : Int32 = 0x010000e2
+
+pub const Key_Pause : Int32 = 0x01000008
+
+pub const Key_Percent : Int32 = 0x25
+
+pub const Key_Period : Int32 = 0x2e
+
+pub const Key_Phone : Int32 = 0x010000e3
+
+pub const Key_Pictures : Int32 = 0x010000fc
+
+pub const Key_Play : Int32 = 0x01020005
+
+pub const Key_Plus : Int32 = 0x2b
+
+pub const Key_PowerDown : Int32 = 0x0100010b
+
+pub const Key_PowerOff : Int32 = 0x010000b7
+
+pub const Key_PreviousCandidate : Int32 = 0x0100113e
+
+pub const Key_Print : Int32 = 0x01000009
+
+pub const Key_Printer : Int32 = 0x01020002
+
+pub const Key_Q : Int32 = 0x51
+
+pub const Key_Question : Int32 = 0x3f
+
+pub const Key_QuoteDbl : Int32 = 0x22
+
+pub const Key_QuoteLeft : Int32 = 0x60
+
+pub const Key_R : Int32 = 0x52
+
+pub const Key_Red : Int32 = 0x01000114
+
+pub const Key_Redo : Int32 = 0x01000124
+
+pub const Key_Refresh : Int32 = 0x01000064
+
+pub const Key_Reload : Int32 = 0x010000e6
+
+pub const Key_Reply : Int32 = 0x010000e5
+
+pub const Key_Return : Int32 = 0x01000004
+
+pub const Key_Right : Int32 = 0x01000014
+
+pub const Key_Romaji : Int32 = 0x01001124
+
+pub const Key_RotateWindows : Int32 = 0x010000e7
+
+pub const Key_RotationKB : Int32 = 0x010000e9
+
+pub const Key_RotationPB : Int32 = 0x010000e8
+
+pub const Key_S : Int32 = 0x53
+
+pub const Key_Save : Int32 = 0x010000ea
+
+pub const Key_ScreenSaver : Int32 = 0x010000ba
+
+pub const Key_ScrollLock : Int32 = 0x01000026
+
+pub const Key_Search : Int32 = 0x01000092
+
+pub const Key_Select : Int32 = 0x01010000
+
+pub const Key_Semicolon : Int32 = 0x3b
+
+pub const Key_Send : Int32 = 0x010000eb
+
+pub const Key_Settings : Int32 = 0x0100011c
+
+pub const Key_Shift : Int32 = 0x01000020
+
+pub const Key_Shop : Int32 = 0x010000be
+
+pub const Key_SingleCandidate : Int32 = 0x0100113c
+
+pub const Key_Slash : Int32 = 0x2f
+
+pub const Key_Sleep : Int32 = 0x01020004
+
+pub const Key_Space : Int32 = 0x20
+
+pub const Key_Spell : Int32 = 0x010000ec
+
+pub const Key_SplitScreen : Int32 = 0x010000ed
+
+pub const Key_Standby : Int32 = 0x01000093
+
+pub const Key_Stop : Int32 = 0x01000063
+
+pub const Key_Subtitle : Int32 = 0x01000105
+
+pub const Key_Super_L : Int32 = 0x01000053
+
+pub const Key_Super_R : Int32 = 0x01000054
+
+pub const Key_Support : Int32 = 0x010000ee
+
+pub const Key_Suspend : Int32 = 0x0100010c
+
+pub const Key_SysReq : Int32 = 0x0100000a
+
+pub const Key_T : Int32 = 0x54
+
+pub const Key_THORN : Int32 = 0x0de
+
+pub const Key_Tab : Int32 = 0x01000001
+
+pub const Key_TaskPane : Int32 = 0x010000ef
+
+pub const Key_Terminal : Int32 = 0x010000f0
+
+pub const Key_Time : Int32 = 0x01000107
+
+pub const Key_ToDoList : Int32 = 0x010000cc
+
+pub const Key_ToggleCallHangup : Int32 = 0x01100007
+
+pub const Key_Tools : Int32 = 0x010000f1
+
+pub const Key_TopMenu : Int32 = 0x0100010a
+
+pub const Key_TouchpadOff : Int32 = 0x01000112
+
+pub const Key_TouchpadOn : Int32 = 0x01000111
+
+pub const Key_TouchpadToggle : Int32 = 0x01000110
+
+pub const Key_Touroku : Int32 = 0x0100112b
+
+pub const Key_Travel : Int32 = 0x010000f2
+
+pub const Key_TrebleDown : Int32 = 0x01000077
+
+pub const Key_TrebleUp : Int32 = 0x01000076
+
+pub const Key_U : Int32 = 0x55
+
+pub const Key_UWB : Int32 = 0x01000101
+
+pub const Key_Uacute : Int32 = 0x0da
+
+pub const Key_Ucircumflex : Int32 = 0x0db
+
+pub const Key_Udiaeresis : Int32 = 0x0dc
+
+pub const Key_Ugrave : Int32 = 0x0d9
+
+pub const Key_Underscore : Int32 = 0x5f
+
+pub const Key_Undo : Int32 = 0x01000123
+
+pub const Key_Up : Int32 = 0x01000013
+
+pub const Key_V : Int32 = 0x56
+
+pub const Key_Video : Int32 = 0x010000f3
+
+pub const Key_View : Int32 = 0x01000109
+
+pub const Key_VoiceDial : Int32 = 0x01100008
+
+pub const Key_VolumeDown : Int32 = 0x01000070
+
+pub const Key_VolumeMute : Int32 = 0x01000071
+
+pub const Key_VolumeUp : Int32 = 0x01000072
+
+pub const Key_W : Int32 = 0x57
+
+pub const Key_WLAN : Int32 = 0x01000100
+
+pub const Key_WWW : Int32 = 0x010000bb
+
+pub const Key_WakeUp : Int32 = 0x010000b8
+
+pub const Key_WebCam : Int32 = 0x010000fa
+
+pub const Key_Word : Int32 = 0x010000f4
+
+pub const Key_X : Int32 = 0x58
+
+pub const Key_Xfer : Int32 = 0x010000f5
+
+pub const Key_Y : Int32 = 0x59
+
+pub const Key_Yacute : Int32 = 0x0dd
+
+pub const Key_Yellow : Int32 = 0x01000116
+
+pub const Key_Yes : Int32 = 0x01010001
+
+pub const Key_Z : Int32 = 0x5a
+
+pub const Key_Zenkaku : Int32 = 0x01001128
+
+pub const Key_Zenkaku_Hankaku : Int32 = 0x0100112a
+
+pub const Key_Zoom : Int32 = 0x01020006
+
+pub const Key_ZoomIn : Int32 = 0x010000f6
+
+pub const Key_ZoomOut : Int32 = 0x010000f7
+
+pub const Key_acute : Int32 = 0x0b4
+
+pub const Key_brokenbar : Int32 = 0x0a6
+
+pub const Key_cedilla : Int32 = 0x0b8
+
+pub const Key_cent : Int32 = 0x0a2
+
+pub const Key_copyright : Int32 = 0x0a9
+
+pub const Key_currency : Int32 = 0x0a4
+
+pub const Key_degree : Int32 = 0x0b0
+
+pub const Key_diaeresis : Int32 = 0x0a8
+
+pub const Key_division : Int32 = 0x0f7
+
+pub const Key_exclamdown : Int32 = 0x0a1
+
+pub const Key_guillemotleft : Int32 = 0x0ab
+
+pub const Key_guillemotright : Int32 = 0x0bb
+
+pub const Key_hyphen : Int32 = 0x0ad
+
+pub const Key_iTouch : Int32 = 0x010000d8
+
+pub const Key_macron : Int32 = 0x0af
+
+pub const Key_masculine : Int32 = 0x0ba
+
+pub const Key_micro : Int32 = 0x0b5
+
+pub const Key_multiply : Int32 = 0x0d7
+
+pub const Key_nobreakspace : Int32 = 0x0a0
+
+pub const Key_notsign : Int32 = 0x0ac
+
+pub const Key_onehalf : Int32 = 0x0bd
+
+pub const Key_onequarter : Int32 = 0x0bc
+
+pub const Key_onesuperior : Int32 = 0x0b9
+
+pub const Key_ordfeminine : Int32 = 0x0aa
+
+pub const Key_paragraph : Int32 = 0x0b6
+
+pub const Key_periodcentered : Int32 = 0x0b7
+
+pub const Key_plusminus : Int32 = 0x0b1
+
+pub const Key_questiondown : Int32 = 0x0bf
+
+pub const Key_registered : Int32 = 0x0ae
+
+pub const Key_section : Int32 = 0x0a7
+
+pub const Key_ssharp : Int32 = 0x0df
+
+pub const Key_sterling : Int32 = 0x0a3
+
+pub const Key_threequarters : Int32 = 0x0be
+
+pub const Key_threesuperior : Int32 = 0x0b3
+
+pub const Key_twosuperior : Int32 = 0x0b2
+
+pub const Key_unknown : Int32 = 0x01ffffff
+
+pub const Key_ydiaeresis : Int32 = 0x0ff
+
+pub const Key_yen : Int32 = 0x0a5
+
+pub fn drop(FixedArray[&Drop]) -> Unit
+
+pub fn key_to_string(Int32) -> String
 
 // Errors
 
 // Types and methods
+type KeyModifier derive(@debug.Debug)
+pub fn KeyModifier::output(Self, &Logger) -> Unit
+#deprecated
+pub fn KeyModifier::to_repr(Self) -> @debug.Repr
+pub fn KeyModifier::to_string(Self) -> String
+pub impl Show for KeyModifier
+
+type MouseButton derive(@debug.Debug)
+pub fn MouseButton::output(Self, &Logger) -> Unit
+#deprecated
+pub fn MouseButton::to_repr(Self) -> @debug.Repr
+pub fn MouseButton::to_string(Self) -> String
+pub impl Show for MouseButton
+
+pub type QApplication
+pub fn QApplication::exec() -> Int32
+pub fn QApplication::new(@ref.Ref[Int32], FixedArray[Bytes]) -> Self
+
+pub type QBrush
+pub fn QBrush::new(QColor) -> Self
+
+pub type QColor
+pub fn QColor::new(Int32, Int32, Int32, Int32) -> Self
+
+pub type QFont
+pub fn QFont::new(QStringList, Int32, Int32, Bool) -> Self
+
+pub type QFontMetricsF
+pub fn QFontMetricsF::boundingRect(Self, QString) -> QRectF
+pub fn QFontMetricsF::height(Self) -> Double
+pub fn QFontMetricsF::horizontalAdvance(Self, QString) -> Double
+pub fn QFontMetricsF::inFontUsc4(Self) -> Bool
+pub fn QFontMetricsF::new(QFont) -> Self
+
+#external
+pub type QPainter
+pub fn QPainter::drawRect(Self, Double, Double, Double, Double) -> Unit
+pub fn QPainter::drawRoundedRect(Self, Double, Double, Double, Double, Double, Double) -> Unit
+pub fn QPainter::drawText(Self, Double, Double, QString) -> Unit
+pub fn QPainter::setBrush(Self, QBrush) -> Unit
+pub fn QPainter::setFont(Self, QFont) -> Unit
+pub fn QPainter::setPen(Self, QPen) -> Unit
+
+pub type QPen
+pub fn QPen::new(QBrush, Double) -> Self
+
+pub type QPointF
+pub fn QPointF::new(Double, Double) -> Self
+pub fn QPointF::x(Self) -> Double
+pub fn QPointF::y(Self) -> Double
+
+pub type QRectF
+pub fn QRectF::bottom(Self) -> Double
+pub fn QRectF::left(Self) -> Double
+pub fn QRectF::new(Double, Double, Double, Double) -> Self
+pub fn QRectF::right(Self) -> Double
+pub fn QRectF::top(Self) -> Double
+
+pub type QSizeF
+pub fn QSizeF::height(Self) -> Double
+pub fn QSizeF::new(Double, Double) -> Self
+pub fn QSizeF::width(Self) -> Double
+
+pub type QString
+pub fn QString::from_builtin(String) -> Self
+pub fn QString::new(String) -> Self
+pub fn QString::to_string(Self) -> String
+
+pub type QStringList
+pub fn QStringList::from_builtin(FixedArray[String]) -> Self
+pub fn QStringList::new(FixedArray[QString]) -> Self
+
+pub type Window
+pub fn Window::devicePixelRatio(Self) -> Int32
+pub fn Window::height(Self) -> Int32
+pub fn Window::new(paint~ : (Self, QPainter) -> Unit, key_press~ : (Self, Int32, KeyModifier) -> Unit, key_release~ : (Self, Int32, KeyModifier) -> Unit, mouse_press~ : (Self, Double, Double, KeyModifier, MouseButton) -> Unit, mouse_release~ : (Self, Double, Double, KeyModifier, MouseButton) -> Unit, mouse_double_click~ : (Self, Double, Double, KeyModifier, MouseButton) -> Unit, mouse_move~ : (Self, Double, Double, KeyModifier, MouseButton) -> Unit, resize~ : (Self, Int32, Int32) -> Unit) -> Self
+pub fn Window::show(Self) -> Unit
+pub fn Window::update(Self) -> Unit
+pub fn Window::width(Self) -> Int32
 
 // Type aliases
+pub type KeyEventHandler = (Window, Int32, KeyModifier) -> Unit
+
+pub type MouseEventHandler = (Window, Double, Double, KeyModifier, MouseButton) -> Unit
+
+pub type PaintEventHandler = (Window, QPainter) -> Unit
+
+pub type ResizeEventHandler = (Window, Int32, Int32) -> Unit
 
 // Traits
+pub(open) trait Drop {
+}

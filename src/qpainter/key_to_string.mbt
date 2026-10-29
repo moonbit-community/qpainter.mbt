@@ -1,5 +1,5 @@
 ///|
-pub fn key_to_string(key : Int) -> String {
+pub fn key_to_string(key : Int32) -> String {
   match key {
     Key_0 => "0"
     Key_1 => "1"
