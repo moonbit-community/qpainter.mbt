@@ -46,14 +46,14 @@ On Ubuntu 24.04:
 
 ```sh
 sudo apt-get install clang-18 cmake make qt6-base-dev pkg-config
-export CC=clang-18 CXX=clang++-18
+export MOON_CC=clang-18 CXX=clang++-18
 moon build --target native src/main
 QT_QPA_PLATFORM=offscreen moon test --target native
 bash scripts/check-native.sh
 ```
 
 On macOS, install Qt 6 and LLVM with Homebrew, expose Qt's pkg-config files,
-and set `CC`/`CXX` to that LLVM installation. The build script discovers Qt
+and set `MOON_CC`/`CXX` to that LLVM installation. The build script discovers Qt
 through CMake and pkg-config; `QT6_INCLUDE` is no longer required.
 
 The regression tests cover UTF-16 conversion (including embedded NUL and
@@ -62,11 +62,10 @@ callbacks. They do not verify interactive input or rendering on a real display.
 `QPAINTER_SANITIZE=1` instruments the bridge and MoonBit executable with ASan
 and UBSan; CI treats sanitizer diagnostics as failures.
 
-**Release blocker:** the offscreen test currently exposes an incompatible
-function-pointer call in `Closure::operator()` in `stub/moonbit_cxx_borrow.h`.
-The custom C++ closure wrapper must be reconciled with the current MoonBit C
-callback ABI before publishing. Ordinary successful tests are insufficient.
-The publishing workflow runs the same sanitizer gate before accessing credentials.
+Event callbacks use MoonBit-generated `FuncRef` adapters and an opaque managed
+context. The C++ side retains callbacks while a window exists and transfers an
+owned reference to each adapter; it never invokes a closure's internal code
+pointer. Tests exercise paint, resize, key, and mouse callbacks under sanitizers.
 
 Qt retains the `argc` and `argv` passed to `QApplication::new`; their MoonBit
 owners must remain alive until the application has finished using them.

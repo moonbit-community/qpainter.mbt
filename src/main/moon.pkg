@@ -9,13 +9,6 @@ warnings = "-1-2-3-5-6-7-8-10-29"
 pkgtype(kind: "executable")
 
 options(
-  link: {
-    "native": {
-      "cc": "${build.CC}",
-      "cc-flags": "${build.CC_FLAGS}",
-      "cc-link-flags": "${build.CC_LINK_FLAGS}",
-    },
-  },
   targets: {
     "main.mbt": [ "native" ],
     "dummy.mbt": [ "js", "wasm", "wasm-gc" ],

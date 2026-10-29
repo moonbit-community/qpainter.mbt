@@ -23,7 +23,18 @@ using MouseEventHandler =
     Closure<Unit, Ref<Window>, Double, Double, KeyModifier, MouseButton>;
 using ResizeEventHandler = Closure<Unit, Ref<Window>, Int, Int>;
 
+// FuncRef adapters are emitted by MoonBit with the C ABI. Never inspect or
+// call the implementation-specific function pointer stored inside a closure.
+using InvokePaint = void (*)(void *, void *, void *);
+using InvokeKey = void (*)(void *, void *, int32_t, int32_t);
+using InvokeMouse = void (*)(void *, void *, double, double, int32_t, int32_t);
+using InvokeResize = void (*)(void *, void *, int32_t, int32_t);
+
 struct Window : QWidget {
+  InvokePaint invoke_paint;
+  InvokeKey invoke_key;
+  InvokeMouse invoke_mouse;
+  InvokeResize invoke_resize;
   Rc<PaintHandler> paint;
   Rc<KeyEventHandler> key_press;
   Rc<KeyEventHandler> key_release;
@@ -34,8 +45,9 @@ struct Window : QWidget {
   Rc<ResizeEventHandler> resize;
   Window(PaintHandler p, KeyEventHandler kp, KeyEventHandler kr,
          MouseEventHandler mp, MouseEventHandler mr, MouseEventHandler mdc,
-         MouseEventHandler mm, ResizeEventHandler rs)
-      : QWidget(), paint(p), key_press(kp), key_release(kr), mouse_press(mp),
+         MouseEventHandler mm, ResizeEventHandler rs,
+         InvokePaint ip, InvokeKey ik, InvokeMouse im, InvokeResize ir)
+      : QWidget(), invoke_paint(ip), invoke_key(ik), invoke_mouse(im), invoke_resize(ir), paint(p), key_press(kp), key_release(kr), mouse_press(mp),
         mouse_release(mr), mouse_double_click(mdc), mouse_move(mm), resize(rs) {
     this->setMouseTracking(true);
   }
@@ -44,8 +56,9 @@ struct Window : QWidget {
     painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing |
                                QPainter::SmoothPixmapTransform,
                            true);
-    (this->paint.repr)(Ref<Window>::from_this(this),
-                       Extern<QPainter>::from(&painter));
+    paint.repr.increment_strong_count();
+    moonbit_incref(this);
+    invoke_paint(paint.repr.repr, this, &painter);
   }
   virtual void keyPressEvent(QKeyEvent *event) noexcept override {
     call_key_event(this->key_press.repr, event);
@@ -68,7 +81,9 @@ struct Window : QWidget {
   virtual void resizeEvent(QResizeEvent *event) noexcept override {
     let width = Int::from(event->oldSize().width());
     let height = Int::from(event->oldSize().height());
-    (this->resize.repr)(Ref<Window>::from_this(this), width, height);
+    resize.repr.increment_strong_count();
+    moonbit_incref(this);
+    invoke_resize(resize.repr.repr, this, width.repr, height.repr);
   }
   void call_mouse_event(MouseEventHandler event_handler,
                         QMouseEvent *event) noexcept {
@@ -77,12 +92,16 @@ struct Window : QWidget {
     let y = Double::from(position.y());
     let modifiers = Int::from(event->modifiers());
     let button = Int::from(event->button());
-    event_handler(Ref<Window>::from_this(this), x, y, modifiers, button);
+    event_handler.increment_strong_count();
+    moonbit_incref(this);
+    invoke_mouse(event_handler.repr, this, x.repr, y.repr, modifiers.repr, button.repr);
   }
   void call_key_event(KeyEventHandler event_handler, QKeyEvent *event) {
     let key = Int::from(event->key());
     let modifiers = Int::from(event->modifiers());
-    event_handler(Ref<Window>::from_this(this), key, modifiers);
+    event_handler.increment_strong_count();
+    moonbit_incref(this);
+    invoke_key(event_handler.repr, this, key.repr, modifiers.repr);
   }
   ~Window() noexcept = default;
 };
@@ -113,6 +132,26 @@ static void force_template_instantiation() {
 
 extern "C" {
 
+void *qpainter_retain_paint_callback(void *callback) {
+  moonbit_incref(callback);
+  return callback;
+}
+
+void *qpainter_retain_key_callback(void *callback) {
+  moonbit_incref(callback);
+  return callback;
+}
+
+void *qpainter_retain_mouse_callback(void *callback) {
+  moonbit_incref(callback);
+  return callback;
+}
+
+void *qpainter_retain_resize_callback(void *callback) {
+  moonbit_incref(callback);
+  return callback;
+}
+
 // constructors
 Ref<QApplication> illusory0x0_QApplication_new(Ref<Int> argc,
                                                FixedArray<Bytes> argv) {
@@ -124,8 +163,9 @@ Ref<Window> illusory0x0_Window_new(PaintHandler p, KeyEventHandler kp,
                                    KeyEventHandler kr, MouseEventHandler mp,
                                    MouseEventHandler mr, MouseEventHandler mdc,
                                    MouseEventHandler mm,
-                                   ResizeEventHandler rs) {
-  return Ref<Window>::from(p, kp, kr, mp, mr, mdc, mm, rs);
+                                   ResizeEventHandler rs, InvokePaint ip, InvokeKey ik,
+                                   InvokeMouse im, InvokeResize ir) {
+  return Ref<Window>::from(p, kp, kr, mp, mr, mdc, mm, rs, ip, ik, im, ir);
 }
 
 Ref<QPainter> illusory0x0_QPainter_new(QPaintDevice *device) {

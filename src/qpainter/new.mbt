@@ -14,8 +14,7 @@ pub type ResizeEventHandler = (Window, Int32, Int32) -> Unit
 /// This constructor is very unstable.
 /// We will redesign it in the future.
 /// 640 * 480 excluded title bar.
-#borrow(paint, key_press, key_release, mouse_double_click, mouse_press, mouse_release, mouse_move, resize)
-pub extern "c" fn Window::new(
+pub fn Window::new(
   paint~ : PaintEventHandler,
   key_press~ : KeyEventHandler,
   key_release~ : KeyEventHandler,
@@ -24,6 +23,42 @@ pub extern "c" fn Window::new(
   mouse_double_click~ : MouseEventHandler,
   mouse_move~ : MouseEventHandler,
   resize~ : ResizeEventHandler,
+) -> Window {
+  window_new_ffi(
+    paint,
+    key_press,
+    key_release,
+    mouse_press,
+    mouse_release,
+    mouse_double_click,
+    mouse_move,
+    resize,
+    (ctx, window, painter) => paint_callback(ctx)(window, painter),
+    (ctx, window, key, modifier) => key_callback(ctx)(window, key, modifier),
+    (ctx, window, x, y, modifier, button) => {
+      mouse_callback(ctx)(window, x, y, modifier, button)
+    },
+    (ctx, window, width, height) => resize_callback(ctx)(window, width, height),
+  )
+}
+
+///|
+#borrow(paint, key_press, key_release, mouse_press, mouse_release, mouse_double_click, mouse_move, resize)
+extern "c" fn window_new_ffi(
+  paint : PaintEventHandler,
+  key_press : KeyEventHandler,
+  key_release : KeyEventHandler,
+  mouse_press : MouseEventHandler,
+  mouse_release : MouseEventHandler,
+  mouse_double_click : MouseEventHandler,
+  mouse_move : MouseEventHandler,
+  resize : ResizeEventHandler,
+  invoke_paint : FuncRef[(CallbackContext, Window, QPainter) -> Unit],
+  invoke_key : FuncRef[(CallbackContext, Window, Int32, KeyModifier) -> Unit],
+  invoke_mouse : FuncRef[
+    (CallbackContext, Window, Double, Double, KeyModifier, MouseButton) -> Unit,
+  ],
+  invoke_resize : FuncRef[(CallbackContext, Window, Int32, Int32) -> Unit],
 ) -> Window = "illusory0x0_Window_new"
 
 ///|
@@ -81,3 +116,25 @@ pub extern "c" fn QFont::new(
 ///|
 #borrow(font)
 pub extern "c" fn QFontMetricsF::new(font : QFont) -> QFontMetricsF = "illusory0x0_QFontMetricsF_new"
+
+///|
+// Opaque managed callback data has the C ABI void* representation. The C++
+// window retains the original closure; each adapter borrows its context and
+// obtains an owned closure reference for a normal, compiler-generated call.
+priv type CallbackContext
+
+///|
+#borrow(ctx)
+extern "c" fn paint_callback(ctx : CallbackContext) -> PaintEventHandler = "qpainter_retain_paint_callback"
+
+///|
+#borrow(ctx)
+extern "c" fn key_callback(ctx : CallbackContext) -> KeyEventHandler = "qpainter_retain_key_callback"
+
+///|
+#borrow(ctx)
+extern "c" fn mouse_callback(ctx : CallbackContext) -> MouseEventHandler = "qpainter_retain_mouse_callback"
+
+///|
+#borrow(ctx)
+extern "c" fn resize_callback(ctx : CallbackContext) -> ResizeEventHandler = "qpainter_retain_resize_callback"

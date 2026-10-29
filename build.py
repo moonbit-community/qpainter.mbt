@@ -12,7 +12,6 @@ import sys
 json.load(sys.stdin)
 root = Path(__file__).resolve().parent
 build = root / "_build" / "qt-native"
-cc = os.environ.get("CC", "clang")
 cxx = os.environ.get("CXX", "clang++")
 flags = "-fsanitize=address,undefined -fno-omit-frame-pointer" if os.environ.get("QPAINTER_SANITIZE") == "1" else ""
 subprocess.run(["cmake", "-S", str(root / "stub"), "-B", str(build),
@@ -28,5 +27,5 @@ if not linked_archive.exists():
     shutil.copyfile(archive, linked_archive)
 qt_libs = subprocess.check_output(["pkg-config", "--libs", "Qt6Widgets"], text=True).strip()
 cxx_lib = "-lc++" if sys.platform == "darwin" else "-lstdc++"
-json.dump({"vars": {"CC": cc, "CC_FLAGS": flags,
-    "CC_LINK_FLAGS": shlex.quote(str(linked_archive)) + " " + qt_libs + " " + cxx_lib + " " + flags}}, sys.stdout)
+link_flags = shlex.quote(str(linked_archive)) + " " + qt_libs + " " + cxx_lib + " " + flags
+json.dump({"link_configs": [{"package": "moonbit-community/qpainter/qpainter", "link_flags": link_flags}]}, sys.stdout)

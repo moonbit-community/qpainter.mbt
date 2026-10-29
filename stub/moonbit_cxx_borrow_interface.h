@@ -23,9 +23,12 @@
 #include <type_traits>
 #include <compare>
 
-extern "C" {
-#include <moonbit.h> // moonbit.h now doesn't support C++ FFI
-}
+// Use libc's C++ noexcept declaration. moonbit.h's fallback declaration is
+// intended for generated C and otherwise conflicts with glibc's <string.h>.
+#include <cstring>
+#define memcpy memcpy
+#include <moonbit.h>
+#undef memcpy
 
 #undef DeriveNewtypeFrom
 #undef DeriveContainerAttribute

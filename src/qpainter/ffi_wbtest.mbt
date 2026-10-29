@@ -24,29 +24,40 @@ test "geometry constructors and getters" {
 extern "c" fn schedule_test_exit() -> Unit = "qpainter_test_schedule_exit"
 
 ///|
-test "offscreen window invokes paint callback" {
+test "offscreen window retains and invokes event callbacks" {
   let argc = Ref(1)
   let argv : FixedArray[Bytes] = [b"qpainter-test"]
   let app = QApplication::new(argc, argv)
   let paints = Ref(0)
+  let keys = Ref(0)
+  let mouse = Ref(0)
+  let resizes = Ref(0)
   let window = Window::new(
     paint=(_, painter) => {
       paints.val += 1
       painter.drawRect(0.0, 0.0, 10.0, 10.0)
     },
-    key_press=(_, _, _) => (),
-    key_release=(_, _, _) => (),
-    mouse_press=(_, _, _, _, _) => (),
-    mouse_release=(_, _, _, _, _) => (),
-    mouse_double_click=(_, _, _, _, _) => (),
-    mouse_move=(_, _, _, _, _) => (),
-    resize=(_, _, _) => (),
+    key_press=(_, _, _) => keys.val += 1,
+    key_release=(_, _, _) => keys.val += 1,
+    mouse_press=(_, _, _, _, _) => mouse.val += 1,
+    mouse_release=(_, _, _, _, _) => mouse.val += 1,
+    mouse_double_click=(_, _, _, _, _) => mouse.val += 1,
+    mouse_move=(_, _, _, _, _) => mouse.val += 1,
+    resize=(_, _, _) => resizes.val += 1,
   )
   assert_true(window.devicePixelRatio() >= 1)
   window.show()
+  send_test_events(window)
   schedule_test_exit()
   assert_eq(QApplication::exec(), 0)
   assert_true(paints.val > 0)
+  assert_true(keys.val >= 2)
+  assert_true(mouse.val >= 4)
+  assert_true(resizes.val > 0)
   // Qt retains argc/argv; keep their owners alive until the event loop exits.
   ignore((window, app, argc, argv))
 }
+
+///|
+#borrow(window)
+extern "c" fn send_test_events(window : Window) -> Unit = "qpainter_test_send_events"
